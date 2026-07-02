@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STALZONE — Инвентарь</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Стили (полностью сохранены) ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: #0b0e14;
+            color: #e0e4ec;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 1400px;
+            width: 100%;
+        }
+        .game-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #f5a623;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #2a2f3a;
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            cursor: pointer;
+            user-select: none;
+        }
+        .game-title small {
+            font-size: 16px;
+            font-weight: 400;
+            color: #7a8290;
+            letter-spacing: 1px;
+        }
+        .easter-egg {
+            display: none;
+            color: #f5a623;
+            font-size: 0.7em;
+            margin-left: 10px;
+            animation: eggAppear 0.4s ease;
+        }
+        @keyframes eggAppear {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .easter-egg.show {
+            display: inline-block;
+        }
+        .hlam-btn {
+            display: block;
+            width: 100%;
+            max-width: 220px;
+            margin: 0 auto 18px;
+            background: linear-gradient(135deg, #1e232c, #2a2f3a);
+            border: 2px solid #f5a623;
+            color: #f5a623;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            padding: 10px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(245, 166, 35, 0.15);
+            text-align: center;
+        }
+        .hlam-btn:hover {
+            background: #f5a623;
+            color: #0b0e14;
+            box-shadow: 0 6px 25px rgba(245, 166, 35, 0.4);
+            transform: scale(1.02);
+        }
+        .sub-tabs {
+            display: none;
+            gap: 12px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            border-bottom: 1px solid #2a2f3a;
+            padding-bottom: 12px;
+        }
+        .sub-tabs.show {
+            display: flex;
+        }
+        .sub-tab-btn {
+            background: transparent;
+            border: 2px solid #3a4050;
+            color: #8a92a2;
+            padding: 8px 20px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .sub-tab-btn:hover {
+            border-color: #6a7288;
+            color: #d0d8e8;
+        }
+        .sub-tab-btn.active {
+            border-color: #f5a623;
+            color: #f5a623;
+            background: rgba(245, 166, 35, 0.08);
+        }
+        .btn-reset {
+            border-color: #8a4a4a;
+            color: #d47a7a;
+        }
+        .btn-reset:hover {
+            border-color: #c0392b;
+            color: #e8a0a0;
+            background: rgba(192, 57, 43, 0.08);
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card {
+            background: #161c26;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            border: 1px solid #2a2f3a;
+        }
+        .card h2 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e0e4ec;
+            margin-bottom: 18px;
+            border-left: 4px solid #f5a623;
+            padding-left: 14px;
+        }
+        .table-wrap {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th {
+            background: #0b0e14;
+            color: #f5a623;
+            padding: 10px 14px;
+            text-align: left;
+            border-bottom: 2px solid #2a2f3a;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 12px;
+        }
+        td {
+            padding: 8px 14px;
+            border-bottom: 1px solid #232a36;
+            vertical-align: middle;
+        }
+        td input[type="text"], td input[type="number"] {
+            width: 100%;
+            background: #0b0e14;
+            border: 1px solid #2a2f3a;
+            border-radius: 8px;
+            color: #e0e4ec;
+            padding: 6px 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        td input:focus {
+            border-color: #f5a623;
+        }
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        .td-actions {
+            text-align: center;
+            white-space: nowrap;
+        }
+        .btn-icon {
+            background: transparent;
+            border: 1px solid #4a4a5a;
+            color: #8a8a9a;
+            border-radius: 30px;
+            padding: 4px 14px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-icon:hover {
+            border-color: #e74c3c;
+            color: #e74c3c;
+            background: rgba(231, 76, 60, 0.1);
+        }
+        .btn {
+            background: #2a2f3a;
+            border: none;
+            border-radius: 30px;
+            color: #e0e4ec;
+            padding: 8px 20px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .btn:hover {
+            background: #3a4050;
+            color: #f5a623;
+        }
+        .btn-success {
+            background: #1e7a3a;
+            color: #b0e8c0;
+        }
+        .btn-success:hover {
+            background: #2a9a4a;
+            color: #fff;
+        }
+        .btn-danger {
+            background: #7a2a2a;
+            color: #e8b0b0;
+        }
+        .btn-danger:hover {
+            background: #9a3a3a;
+            color: #fff;
+        }
+        .import-area {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: flex-end;
+        }
+        .import-area textarea {
+            flex: 1;
+            min-width: 250px;
+            background: #0b0e14;
+            border: 1px solid #2a2f3a;
+            border-radius: 12px;
+            color: #e0e4ec;
+            padding: 10px 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            height: 80px;
+            resize: vertical;
+            outline: none;
+        }
+        .import-area textarea:focus {
+            border-color: #f5a623;
+        }
+        .import-area .hint {
+            font-size: 11px;
+            color: #6a7288;
+            width: 100%;
+            margin-top: 4px;
+        }
+        .calc-layout {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .calc-list {
+            flex: 2;
+            min-width: 300px;
+        }
+        .calc-totals {
+            flex: 1;
+            min-width: 220px;
+            background: #0b0e14;
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid #2a2f3a;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+        .calc-totals h2 {
+            font-size: 16px;
+            border-left: 4px solid #f5a623;
+            padding-left: 12px;
+            margin-bottom: 16px;
+        }
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 10px;
+        }
+        .item-card {
+            background: #1a212c;
+            border-radius: 14px;
+            padding: 16px 14px 14px;
+            border: 1px solid #2a2f3a;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+        .item-card:hover {
+            border-color: #4a5268;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .item-card.selected {
+            border-color: #f5a623;
+            background: #1e2633;
+        }
+        .item-card .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .item-card .card-header input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #f5a623;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .item-card .card-header .cname {
+            font-weight: 600;
+            font-size: 15px;
+            color: #e0e4ec;
+            word-break: break-word;
+        }
+        .item-card .cprice {
+            font-size: 14px;
+            color: #8a92a2;
+            margin-bottom: 10px;
+        }
+        .item-card .cprice span {
+            color: #f5a623;
+            font-weight: 600;
+        }
+        .item-card .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            border-top: 1px solid #2a2f3a;
+            padding-top: 10px;
+        }
+        .item-card .card-actions label {
+            font-size: 12px;
+            color: #8a92a2;
+            margin-right: 4px;
+        }
+        .item-card .cqty {
+            width: 60px;
+            background: #0b0e14;
+            border: 1px solid #2a2f3a;
+            border-radius: 8px;
+            color: #e0e4ec;
+            padding: 4px 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            text-align: center;
+            outline: none;
+        }
+        .item-card .cqty:focus {
+            border-color: #f5a623;
+        }
+        .item-card .cline-total {
+            font-weight: 700;
+            font-size: 15px;
+            color: #f5a623;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-top: 2px solid #2a2f3a;
+            margin-top: 12px;
+            font-size: 18px;
+        }
+        .total-row .label {
+            color: #8a92a2;
+            font-weight: 400;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .total-row .value {
+            color: #f5a623;
+            font-weight: 700;
+            font-size: 24px;
+        }
+        .select-all-bar {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .select-all-bar label {
+            font-size: 13px;
+            color: #8a92a2;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .select-all-bar input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #f5a623;
+        }
+        .select-all-bar .count-badge {
+            margin-left: auto;
+            font-size: 13px;
+            color: #6a7288;
+        }
+        .empty-state {
+            text-align: center;
+            color: #4a5268;
+            padding: 40px 0;
+            font-size: 16px;
+        }
+        @media (max-width: 700px) {
+            .game-title { font-size: 22px; }
+            .game-title small { font-size: 14px; }
+            .hlam-btn { max-width: 180px; font-size: 16px; }
+            .sub-tab-btn { font-size: 12px; padding: 6px 14px; }
+            .calc-layout { flex-direction: column; }
+            .calc-totals { position: static; }
+            .items-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+            .item-card .cname { font-size: 13px; }
+        }
+        @media (max-width: 450px) {
+            .items-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ===== ЗАГОЛОВОК ===== -->
+    <div class="game-title" id="titleClick">
+        <span class="main-title">STALZONE</span>
+        <span class="easter-egg">Че любопытный? Нажни два раза на кнопку ХЛАМ</span>
+    </div>
+
+    <!-- ===== КНОПКА ХЛАМ ===== -->
+    <button class="hlam-btn" id="hlamBtn">📦 ХЛАМ</button>
+
+    <!-- ===== ПОДМЕНЮ ===== -->
+    <div class="sub-tabs" id="subTabs">
+        <button class="sub-tab-btn active" data-tab="tab1">📋 прайс-лист</button>
+        <button class="sub-tab-btn" data-tab="tab2">💰 продажа</button>
+        <button class="sub-tab-btn btn-reset" id="resetSalesBtn">🔄 сбросить продажи</button>
+    </div>
+
+    <!-- ============================================================
+         ВКЛАДКА 1: ПРАЙС-ЛИСТ
+         ============================================================ -->
+    <div id="tab1" class="tab-content active">
+        <div class="card">
+            <h2>📝 редактирование прайс-листа</h2>
+            <p style="font-size:14px; color:#8a92a2; margin-bottom:16px;">
+                Здесь хранятся названия и цены продажи. Все изменения автоматически синхронизируются с продажей.
+            </p>
+
+            <div class="table-wrap">
+                <table id="editorTable">
+                    <thead>
+                        <tr>
+                            <th style="width:50px;">#</th>
+                            <th>Название</th>
+                            <th style="width:160px;">Цена (₽)</th>
+                            <th style="width:80px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="editorBody">
+                        <!-- генерируется JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+                <button class="btn btn-success" id="addRowBtn">➕ Добавить</button>
+                <button class="btn btn-danger" id="clearTableBtn">🗑 Очистить всё</button>
+            </div>
+
+            <!-- Импорт -->
+            <div class="import-area">
+                <div style="flex:1; min-width:250px;">
+                    <label style="font-size:13px; color:#8a92a2; display:block; margin-bottom:4px;">⚡ массовый импорт</label>
+                    <textarea id="importText" placeholder="Название, цена&#10;Макоть сластель, 9500&#10;Башка с шинкой, 2000"></textarea>
+                </div>
+                <button class="btn" id="importBtn" style="margin-bottom:6px;">⬇ Импортировать</button>
+                <div class="hint">* Формат: "Название, Цена". Число в конце строки — цена.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         ВКЛАДКА 2: ПРОДАЖА (карточки)
+         ============================================================ -->
+    <div id="tab2" class="tab-content">
+        <div class="card">
+            <h2>💰 продажа</h2>
+            <div class="calc-layout">
+                <div class="calc-list">
+                    <!-- Панель выбора -->
+                    <div class="select-all-bar">
+                        <label><input type="checkbox" id="sellSelectAll"> Выбрать все</label>
+                        <label><input type="checkbox" id="sellDeselectAll"> Снять все</label>
+                        <span class="count-badge" id="sellSelectedCount">Выбрано: 0</span>
+                    </div>
+                    <!-- Сетка карточек -->
+                    <div id="sellListContainer" class="items-grid">
+                        <!-- генерируется JS -->
+                    </div>
+                </div>
+                <div class="calc-totals">
+                    <h2>📊 итог</h2>
+                    <div id="sellTotalDisplay">
+                        <div class="total-row">
+                            <span class="label">Общая выручка</span>
+                            <span class="value" id="sellTotalSum">0 ₽</span>
+                        </div>
+                        <div style="font-size:12px; color:#6a7288; text-align:center; margin-top:10px;">
+                            Отметьте предметы и укажите количество
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ================================================================
+    //   ХРАНИЛИЩЕ
+    // ================================================================
+    const STORAGE_KEY = 'stalzone_inventory_v5';
+
+    const DEFAULT_ITEMS = [
+        "Макоть сластель, 9500",
+        "Макоть соленка, 2500",
+        "Макоть кубербуза, 800",
+        "Макоть лимонника, 1200",
+        "Макоть спирта, 300",
+        "Макоть мятюльника, 100",
+        "Янтарная вольна, 8500",
+        "Чертоцвет, 750",
+        "Гвоздь, 90",
+        "Водонос, 60",
+        "Бензодиэтил, 60",
+        "Зольные минералы, 1800",
+        "Алые минералы, 400",
+        "Пурпуровые минералы, 250",
+        "Латунные минералы, 80",
+        "Нумедужные минералы, 40",
+        "Тусклые минералы, 30",
+        "Светящийся сахар, 4200",
+        "Башка с шинкой, 1800",
+        "Дрожжи, 3500",
+        "Помидор, 1200",
+        "Чеснок, 1200",
+        "Коньяк сельского кабана, 4000",
+        "Боковой горох, 1200",
+        "Набор специй, 4000",
+        "Малокол, 120",
+        "Кофе, 600",
+        "Глаз зомби, 350",
+        "Окунь мертвенная, 2500",
+        "Гнилофит мертвенная, 5500",
+        "Мясо хрипя, 2200",
+        "Мясо кабана, 2200",
+        "Мясо шампиньона, 2200",
+        "Охлажная тушенка, 800",
+        "Кобальтная нарезка, 700",
+        "Гамма Баллон, 6000",
+        "Кастрюля, 1800",
+        "Сковорода, 1800",
+        "Реагенты, 700",
+        "Мультитул, 3500",
+        "Набор Балтов, 4000",
+        "Остатки приборов Шепота, 30000",
+        "Железо, 700",
+        "Биоактиваты, 7000",
+        "Удар, 3000",
+        "Аптечка кислота, 7000",
+        "Кальванит, 1200",
+        "Аммиак, 12000",
+        "Аммиакальная пылька, 1200",
+        "Аммиакальная пылька, 300",
+        "Страшный артефакт, 1200",
+        "Протоартефакт (обычный/любимый/особый), 2000",
+        "Огромный артефактный батарея холодного синтеза, 1300",
+        "Огромный батарея холодного синтеза, 4000",
+        "Темный Лимб, 150000",
+        "Сердце мутанта Любера, 8500",
+        "Свежевая мутанта Любера, 9500",
+        "Сердце Лимб, 500000",
+        "Черная свежевая, 100000",
+        "Концентрированная лимба, 450000",
+        "Консервная банка, 250",
+        "Едкий натрий, 1800",
+        "Гнилью доски, 700",
+        "Щеки, 15",
+        "Животный жир, 800",
+        "Ткань, 1200",
+        "Полутуловая рыба, 3500",
+        "Гремучая ртуть, 3000",
+        "Крепкая сталь, 100",
+        "Набор кухонных ножей, 3800",
+        "Сталь, 300",
+        "Защитное снаряжение, 6000"
+    ];
+
+    // ================================================================
+    //   БАЗОВЫЕ ФУНКЦИИ
+    // ================================================================
+
+    function getItems() {
+        try {
+            const data = localStorage.getItem(STORAGE_KEY);
+            if (data) {
+                const parsed = JSON.parse(data);
+                if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            }
+        } catch (e) {}
+        return DEFAULT_ITEMS.map((str, index) => {
+            const parts = str.split(',').map(s => s.trim());
+            let name = parts[0] || 'Без названия';
+            let price = parseInt(parts[1]?.replace(/\s/g, '')) || 0;
+            return {
+                id: Date.now() + '_' + index + '_' + Math.random().toString(36).slice(2, 5),
+                name: name,
+                price: price,
+                qty: 0,
+                selected: false
+            };
+        });
+    }
+
+    function saveItems(items) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    }
+
+    function generateId() {
+        return Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+    }
+
+    // ================================================================
+    //   ОТРИСОВКА ПРАЙС-ЛИСТА
+    // ================================================================
+
+    function renderEditor() {
+        const items = getItems();
+        const tbody = document.getElementById('editorBody');
+        tbody.innerHTML = '';
+
+        if (items.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#4a5268; padding:30px;">Прайс-лист пуст. Добавьте предметы!</td></tr>`;
+            return;
+        }
+
+        items.forEach((item, index) => {
+            const tr = document.createElement('tr');
+            tr.dataset.id = item.id;
+
+            const tdNum = document.createElement('td');
+            tdNum.textContent = index + 1;
+            tdNum.style.textAlign = 'center';
+            tdNum.style.color = '#6a7288';
+            tdNum.style.fontSize = '13px';
+
+            const tdName = document.createElement('td');
+            const inpName = document.createElement('input');
+            inpName.type = 'text';
+            inpName.value = item.name;
+            inpName.placeholder = 'Название...';
+            inpName.addEventListener('change', function() {
+                const newName = this.value.trim() || 'Без названия';
+                const items = getItems();
+                const found = items.find(it => it.id === item.id);
+                if (found) {
+                    found.name = newName;
+                    saveItems(items);
+                    renderEditor();
+                    renderSell();
+                }
+            });
+            tdName.appendChild(inpName);
+
+            const tdPrice = document.createElement('td');
+            const inpPrice = document.createElement('input');
+            inpPrice.type = 'number';
+            inpPrice.value = item.price;
+            inpPrice.min = 0;
+            inpPrice.step = 1;
+            inpPrice.addEventListener('change', function() {
+                const val = parseInt(this.value) || 0;
+                const items = getItems();
+                const found = items.find(it => it.id === item.id);
+                if (found) {
+                    found.price = val;
+                    saveItems(items);
+                    renderSell();
+                }
+            });
+            tdPrice.appendChild(inpPrice);
+
+            const tdAction = document.createElement('td');
+            tdAction.className = 'td-actions';
+            const delBtn = document.createElement('button');
+            delBtn.className = 'btn-icon';
+            delBtn.textContent = '✕ удалить';
+            delBtn.addEventListener('click', function() {
+                if (confirm(`Удалить "${item.name}"?`)) {
+                    let items = getItems();
+                    items = items.filter(it => it.id !== item.id);
+                    saveItems(items);
+                    renderEditor();
+                    renderSell();
+                }
+            });
+            tdAction.appendChild(delBtn);
+
+            tr.appendChild(tdNum);
+            tr.appendChild(tdName);
+            tr.appendChild(tdPrice);
+            tr.appendChild(tdAction);
+            tbody.appendChild(tr);
+        });
+    }
+
+    // ================================================================
+    //   ОТРИСОВКА ПРОДАЖИ (с оптимизацией)
+    // ================================================================
+
+    let cardElements = {};
+
+    function renderSell() {
+        const items = getItems();
+        const container = document.getElementById('sellListContainer');
+        const totalSpan = document.getElementById('sellTotalSum');
+        const countSpan = document.getElementById('sellSelectedCount');
+
+        if (items.length === 0) {
+            container.innerHTML = `<div class="empty-state">📭 Прайс-лист пуст<br><span style="font-size:14px;">Добавьте предметы в прайс-лист</span></div>`;
+            totalSpan.textContent = '0 ₽';
+            countSpan.textContent = 'Выбрано: 0';
+            cardElements = {};
+            return;
+        }
+
+        // Проверяем, нужно ли перерисовывать полностью
+        const currentIds = Object.keys(cardElements);
+        const newIds = items.map(it => it.id);
+        const needFullRender = currentIds.length !== newIds.length || !currentIds.every(id => newIds.includes(id));
+
+        if (needFullRender) {
+            container.innerHTML = '';
+            cardElements = {};
+            items.forEach(item => {
+                const card = createCard(item);
+                container.appendChild(card);
+                cardElements[item.id] = card;
+            });
+        } else {
+            items.forEach(item => {
+                const card = cardElements[item.id];
+                if (!card) return;
+                updateCard(card, item);
+            });
+        }
+
+        updateTotals(items);
+    }
+
+    function createCard(item) {
+        const card = document.createElement('div');
+        card.className = 'item-card' + (item.selected ? ' selected' : '');
+        card.dataset.id = item.id;
+
+        const header = document.createElement('div');
+        header.className = 'card-header';
+
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = item.selected || false;
+        cb.addEventListener('change', function(e) {
+            e.stopPropagation();
+            const items = getItems();
+            const found = items.find(it => it.id === item.id);
+            if (found) {
+                found.selected = this.checked;
+                saveItems(items);
+                updateCard(card, found);
+                updateTotals(getItems());
+            }
+        });
+        header.appendChild(cb);
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'cname';
+        nameSpan.textContent = item.name;
+        header.appendChild(nameSpan);
+
+        const priceDiv = document.createElement('div');
+        priceDiv.className = 'cprice';
+        priceDiv.innerHTML = `Цена: <span>${item.price.toLocaleString()} ₽</span>`;
+
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+
+        const qtyLabel = document.createElement('label');
+        qtyLabel.textContent = 'Кол-во:';
+        const qtyInput = document.createElement('input');
+        qtyInput.type = 'number';
+        qtyInput.className = 'cqty';
+        qtyInput.value = item.qty || 0;
+        qtyInput.min = 0;
+        qtyInput.step = 1;
+        qtyInput.dataset.id = item.id;
+        qtyInput.addEventListener('input', function() {
+            const val = parseInt(this.value) || 0;
+            const items = getItems();
+            const found = items.find(it => it.id === item.id);
+            if (found) {
+                found.qty = val;
+                saveItems(items);
+                updateCard(card, found);
+                updateTotals(getItems());
+            }
+        });
+
+        const totalSpanLine = document.createElement('span');
+        totalSpanLine.className = 'cline-total';
+        const lineTotal = (item.selected ? item.price : 0) * (item.qty || 0);
+        totalSpanLine.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
+
+        actions.appendChild(qtyLabel);
+        actions.appendChild(qtyInput);
+        actions.appendChild(totalSpanLine);
+
+        card.appendChild(header);
+        card.appendChild(priceDiv);
+        card.appendChild(actions);
+
+        return card;
+    }
+
+    function updateCard(card, item) {
+        card.className = 'item-card' + (item.selected ? ' selected' : '');
+        const cb = card.querySelector('.card-header input[type="checkbox"]');
+        if (cb) cb.checked = item.selected || false;
+
+        const nameSpan = card.querySelector('.card-header .cname');
+        if (nameSpan) nameSpan.textContent = item.name;
+
+        const priceSpan = card.querySelector('.cprice span');
+        if (priceSpan) priceSpan.textContent = item.price.toLocaleString() + ' ₽';
+
+        const qtyInput = card.querySelector('.cqty');
+        if (qtyInput && document.activeElement !== qtyInput) {
+            qtyInput.value = item.qty || 0;
+        }
+
+        const totalSpan = card.querySelector('.cline-total');
+        if (totalSpan) {
+            const lineTotal = (item.selected ? item.price : 0) * (item.qty || 0);
+            totalSpan.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
+        }
+    }
+
+    function updateTotals(items) {
+        let grandTotal = 0;
+        let selectedCount = 0;
+        items.forEach(item => {
+            if (item.selected && item.qty > 0) {
+                grandTotal += item.price * item.qty;
+                selectedCount++;
+            }
+        });
+        document.getElementById('sellTotalSum').textContent = grandTotal.toLocaleString() + ' ₽';
+        document.getElementById('sellSelectedCount').textContent = `Выбрано: ${selectedCount}`;
+    }
+
+    // ================================================================
+    //   ДОБАВЛЕНИЕ / УДАЛЕНИЕ / ИМПОРТ
+    // ================================================================
+
+    document.getElementById('addRowBtn').addEventListener('click', function() {
+        const items = getItems();
+        items.push({
+            id: generateId(),
+            name: 'Новый предмет',
+            price: 0,
+            qty: 0,
+            selected: false
+        });
+        saveItems(items);
+        renderEditor();
+        renderSell();
+    });
+
+    document.getElementById('clearTableBtn').addEventListener('click', function() {
+        if (confirm('Удалить ВСЕ предметы из прайс-листа?')) {
+            saveItems([]);
+            renderEditor();
+            cardElements = {};
+            renderSell();
+        }
+    });
+
+    function parseImportText(text) {
+        const lines = text.split('\n').filter(line => line.trim() !== '');
+        const newItems = [];
+        lines.forEach(line => {
+            let clean = line.trim();
+            const numbers = clean.match(/\d+[\s\d]*\d+/g);
+            let price = 0, name = clean;
+            if (numbers && numbers.length > 0) {
+                const lastNum = numbers[numbers.length - 1];
+                price = parseInt(lastNum.replace(/\s/g, '')) || 0;
+                name = clean.replace(lastNum, '').trim().replace(/[,\-–—]\s*$/, '').trim();
+            } else {
+                const parts = clean.split(/[,\-–—]\s*/);
+                if (parts.length >= 2) {
+                    const maybePrice = parseInt(parts[parts.length - 1].replace(/\s/g, ''));
+                    if (!isNaN(maybePrice)) {
+                        price = maybePrice;
+                        name = parts.slice(0, -1).join(' ').trim();
+                    }
+                }
+            }
+            if (name) {
+                newItems.push({
+                    id: generateId(),
+                    name: name,
+                    price: price || 0,
+                    qty: 0,
+                    selected: false
+                });
+            }
+        });
+        return newItems;
+    }
+
+    document.getElementById('importBtn').addEventListener('click', function() {
+        const text = document.getElementById('importText').value;
+        if (!text.trim()) {
+            alert('Вставьте список предметов!');
+            return;
+        }
+        const parsed = parseImportText(text);
+        if (parsed.length === 0) {
+            alert('Не удалось распознать предметы.');
+            return;
+        }
+        const current = getItems();
+        saveItems([...current, ...parsed]);
+        document.getElementById('importText').value = '';
+        renderEditor();
+        cardElements = {};
+        renderSell();
+        alert(`✅ Добавлено ${parsed.length} предметов!`);
+    });
+
+    // ================================================================
+    //   СБРОС ПРОДАЖ
+    // ================================================================
+
+    document.getElementById('resetSalesBtn').addEventListener('click', function() {
+        if (confirm('Сбросить все количества и галочки в продаже?')) {
+            const items = getItems();
+            items.forEach(item => {
+                item.qty = 0;
+                item.selected = false;
+            });
+            saveItems(items);
+            renderSell();
+        }
+    });
+
+    // ================================================================
+    //   КНОПКА ХЛАМ — ОСНОВНАЯ ФУНКЦИЯ (одинарный клик)
+    // ================================================================
+
+    let isHlamOpen = false;
+
+    document.getElementById('hlamBtn').addEventListener('click', function() {
+        const subTabs = document.getElementById('subTabs');
+        if (isHlamOpen) {
+            subTabs.classList.remove('show');
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+            isHlamOpen = false;
+        } else {
+            subTabs.classList.add('show');
+            const firstTab = document.querySelector('.sub-tab-btn:not(.btn-reset)');
+            if (firstTab) {
+                firstTab.classList.add('active');
+                document.getElementById(firstTab.dataset.tab).classList.add('active');
+            }
+            isHlamOpen = true;
+        }
+    });
+
+    // ================================================================
+    //   ПАСХАЛКА-РИКРОЛЛ: ДВОЙНОЙ КЛИК ПО КНОПКЕ ХЛАМ
+    // ================================================================
+
+    document.getElementById('hlamBtn').addEventListener('dblclick', function(e) {
+        e.stopPropagation(); // предотвращаем случайное срабатывание других обработчиков
+        window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+    });
+
+    // ================================================================
+    //   ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+    // ================================================================
+
+    document.querySelectorAll('.sub-tab-btn[data-tab]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            const tabId = this.dataset.tab;
+            document.getElementById(tabId).classList.add('active');
+            if (tabId === 'tab2') renderSell();
+        });
+    });
+
+    // ================================================================
+    //   ВЫБРАТЬ / СНЯТЬ ВСЕ
+    // ================================================================
+
+    document.getElementById('sellSelectAll').addEventListener('change', function() {
+        const items = getItems();
+        items.forEach(it => it.selected = true);
+        saveItems(items);
+        renderSell();
+        this.checked = false;
+    });
+
+    document.getElementById('sellDeselectAll').addEventListener('change', function() {
+        const items = getItems();
+        items.forEach(it => it.selected = false);
+        saveItems(items);
+        renderSell();
+        this.checked = false;
+    });
+
+    // ================================================================
+    //   ПАСХАЛКА НА ЗАГОЛОВОК
+    // ================================================================
+
+    document.getElementById('titleClick').addEventListener('click', function() {
+        const egg = this.querySelector('.easter-egg');
+        if (egg.classList.contains('show')) {
+            egg.classList.remove('show');
+            setTimeout(() => { egg.style.display = 'none'; }, 300);
+        } else {
+            egg.style.display = 'inline-block';
+            egg.classList.remove('show');
+            void egg.offsetWidth;
+            egg.classList.add('show');
+            clearTimeout(window.eggTimer);
+            window.eggTimer = setTimeout(() => {
+                egg.classList.remove('show');
+                setTimeout(() => { egg.style.display = 'none'; }, 300);
+            }, 2000);
+        }
+    });
+
+    // ================================================================
+    //   СТАРТ
+    // ================================================================
+
+    document.getElementById('subTabs').classList.remove('show');
+    document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+    document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+
+    renderEditor();
+    renderSell();
+</script>
+</body>
+</html>
