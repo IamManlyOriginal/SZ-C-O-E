@@ -621,7 +621,7 @@
             font-size: 16px;
         }
 
-        /* ===== Стили для вкладки "Мякоть" ===== */
+        /* ===== Стили для вкладки "Мякоть" (добавлена сортировка) ===== */
         .category-items {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -879,7 +879,7 @@
         </div>
 
         <!-- ============================================================
-         ВКЛАДКА 3: МЯКОТЬ (только мякоть, без фильтра и сортировки)
+         ВКЛАДКА 3: МЯКОТЬ (с сортировкой по цене и имени)
          ============================================================ -->
         <div id="tab3" class="tab-content">
             <div class="card">
@@ -887,6 +887,15 @@
                 <p style="font-size:14px; color:#8a92a2; margin-bottom:16px;">
                     Список предметов категории «Мякоть». Укажите количество для расчёта общей стоимости.
                 </p>
+
+                <!-- Блок сортировки для мякоти -->
+                <div class="sort-buttons" style="margin-bottom: 16px; display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button class="btn active-sort" data-sort-cat="name-asc">Имя ↑</button>
+                    <button class="btn" data-sort-cat="name-desc">Имя ↓</button>
+                    <button class="btn" data-sort-cat="price-asc">Цена ↑</button>
+                    <button class="btn" data-sort-cat="price-desc">Цена ↓</button>
+                </div>
+
                 <div id="categoryItemsContainer">
                     <!-- Список мякоти с полем количества -->
                 </div>
@@ -905,7 +914,7 @@
         const STORAGE_KEY = 'stalzone_inventory_v6';
         const CATEGORIES_KEY = 'stalzone_categories'; // отдельное хранилище для категорий
 
-        // Начальные данные (категории из DEFAULT_ITEMS)
+        // Начальные данные (категории из DEFAULT_ITEMS) — ваши данные сохранены
         const DEFAULT_ITEMS = [
             "Мякоть сластены, 9500, Мякоть",
             "Мякоть солевика, 2500, Мякоть",
@@ -1448,18 +1457,37 @@
         });
 
         // ================================================================
-        //   ОТРИСОВКА ВКЛАДКИ "МЯКОТЬ" (только категория "Мякоть")
+        //   ОТРИСОВКА ВКЛАДКИ "МЯКОТЬ" (с сортировкой)
         // ================================================================
 
         let catCardElements = {};
+        let мякоть_сортировка = 'name-asc'; // текущая сортировка для мякоти
 
         function renderCategory() {
             const items = getItems();
             const container = document.getElementById('categoryItemsContainer');
             const totalSpan = document.getElementById('categoryTotalSum');
 
-            const filtered = items.filter(item => item.category === 'Мякоть');
-            filtered.sort((a, b) => a.name.localeCompare(b.name));
+            // Фильтруем только мякоть
+            let filtered = items.filter(item => item.category === 'Мякоть');
+
+            // Сортируем в зависимости от выбранного типа
+            switch (мякоть_сортировка) {
+                case 'name-asc':
+                    filtered.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    filtered.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'price-asc':
+                    filtered.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-desc':
+                    filtered.sort((a, b) => b.price - a.price);
+                    break;
+                default:
+                    filtered.sort((a, b) => a.name.localeCompare(b.name));
+            }
 
             if (filtered.length === 0) {
                 container.innerHTML = `<div class="empty-state">Нет предметов в категории «Мякоть»</div>`;
@@ -1568,6 +1596,23 @@
                 totalSpan.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
             }
         }
+
+        // ================================================================
+        //   ОБРАБОТЧИКИ СОРТИРОВКИ ДЛЯ МЯКОТИ
+        // ================================================================
+
+        document.querySelectorAll('#tab3 .sort-buttons .btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const sort = this.dataset.sortCat;
+                if (sort) {
+                    мякоть_сортировка = sort;
+                    // Визуальное выделение
+                    document.querySelectorAll('#tab3 .sort-buttons .btn').forEach(b => b.classList.remove('active-sort'));
+                    this.classList.add('active-sort');
+                    renderCategory();
+                }
+            });
+        });
 
         // ================================================================
         //   ДОБАВЛЕНИЕ / УДАЛЕНИЕ / ИМПОРТ
