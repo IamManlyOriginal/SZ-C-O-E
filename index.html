@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STALZONE — Инвентарь</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
     <style>
-        /* ===== Базовые стили (сохранены) ===== */
+        /* ===== Все стили (без изменений) ===== */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background: #0b0e14;
@@ -21,10 +23,12 @@
             display: flex;
             justify-content: center;
         }
+
         .container {
             max-width: 1400px;
             width: 100%;
         }
+
         .game-title {
             font-size: 28px;
             font-weight: 700;
@@ -42,12 +46,14 @@
             cursor: pointer;
             user-select: none;
         }
+
         .game-title small {
             font-size: 16px;
             font-weight: 400;
             color: #7a8290;
             letter-spacing: 1px;
         }
+
         .easter-egg {
             display: none;
             color: #f5a623;
@@ -55,13 +61,23 @@
             margin-left: 10px;
             animation: eggAppear 0.4s ease;
         }
+
         @keyframes eggAppear {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .easter-egg.show {
             display: inline-block;
         }
+
         .hlam-btn {
             display: block;
             width: 100%;
@@ -82,12 +98,14 @@
             box-shadow: 0 4px 15px rgba(245, 166, 35, 0.15);
             text-align: center;
         }
+
         .hlam-btn:hover {
             background: #f5a623;
             color: #0b0e14;
             box-shadow: 0 6px 25px rgba(245, 166, 35, 0.4);
             transform: scale(1.02);
         }
+
         .sub-tabs {
             display: none;
             gap: 12px;
@@ -97,9 +115,11 @@
             border-bottom: 1px solid #2a2f3a;
             padding-bottom: 12px;
         }
+
         .sub-tabs.show {
             display: flex;
         }
+
         .sub-tab-btn {
             background: transparent;
             border: 2px solid #3a4050;
@@ -114,35 +134,50 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
         .sub-tab-btn:hover {
             border-color: #6a7288;
             color: #d0d8e8;
         }
+
         .sub-tab-btn.active {
             border-color: #f5a623;
             color: #f5a623;
             background: rgba(245, 166, 35, 0.08);
         }
+
         .btn-reset {
             border-color: #8a4a4a;
             color: #d47a7a;
         }
+
         .btn-reset:hover {
             border-color: #c0392b;
             color: #e8a0a0;
             background: rgba(192, 57, 43, 0.08);
         }
+
         .tab-content {
             display: none;
             animation: fadeIn 0.3s ease;
         }
+
         .tab-content.active {
             display: block;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .card {
             background: #161c26;
             border-radius: 16px;
@@ -151,6 +186,7 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
             border: 1px solid #2a2f3a;
         }
+
         .card h2 {
             font-size: 18px;
             font-weight: 600;
@@ -159,14 +195,17 @@
             border-left: 4px solid #f5a623;
             padding-left: 14px;
         }
+
         .table-wrap {
             overflow-x: auto;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
         }
+
         th {
             background: #0b0e14;
             color: #f5a623;
@@ -178,12 +217,16 @@
             letter-spacing: 0.5px;
             font-size: 12px;
         }
+
         td {
             padding: 8px 14px;
             border-bottom: 1px solid #232a36;
             vertical-align: middle;
         }
-        td input[type="text"], td input[type="number"] {
+
+        td input[type="text"],
+        td input[type="number"],
+        td select {
             width: 100%;
             background: #0b0e14;
             border: 1px solid #2a2f3a;
@@ -195,21 +238,32 @@
             outline: none;
             transition: border 0.2s;
         }
-        td input:focus {
+
+        td input:focus,
+        td select:focus {
             border-color: #f5a623;
         }
+
+        td select {
+            appearance: auto;
+            cursor: pointer;
+        }
+
         input[type=number]::-webkit-inner-spin-button,
         input[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
+
         input[type=number] {
             -moz-appearance: textfield;
         }
+
         .td-actions {
             text-align: center;
             white-space: nowrap;
         }
+
         .btn-icon {
             background: transparent;
             border: 1px solid #4a4a5a;
@@ -220,11 +274,13 @@
             cursor: pointer;
             transition: all 0.15s;
         }
+
         .btn-icon:hover {
             border-color: #e74c3c;
             color: #e74c3c;
             background: rgba(231, 76, 60, 0.1);
         }
+
         .btn {
             background: #2a2f3a;
             border: none;
@@ -239,26 +295,32 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
         .btn:hover {
             background: #3a4050;
             color: #f5a623;
         }
+
         .btn-success {
             background: #1e7a3a;
             color: #b0e8c0;
         }
+
         .btn-success:hover {
             background: #2a9a4a;
             color: #fff;
         }
+
         .btn-danger {
             background: #7a2a2a;
             color: #e8b0b0;
         }
+
         .btn-danger:hover {
             background: #9a3a3a;
             color: #fff;
         }
+
         .import-area {
             margin-top: 18px;
             display: flex;
@@ -266,6 +328,7 @@
             gap: 14px;
             align-items: flex-end;
         }
+
         .import-area textarea {
             flex: 1;
             min-width: 250px;
@@ -280,9 +343,11 @@
             resize: vertical;
             outline: none;
         }
+
         .import-area textarea:focus {
             border-color: #f5a623;
         }
+
         .import-area .hint {
             font-size: 11px;
             color: #6a7288;
@@ -290,16 +355,17 @@
             margin-top: 4px;
         }
 
-        /* Дополнительный стиль для загрузки .txt */
         .file-upload {
             display: flex;
             gap: 10px;
             align-items: center;
             flex-wrap: wrap;
         }
+
         .file-upload input[type="file"] {
             display: none;
         }
+
         .file-upload label {
             background: #2a2f3a;
             border-radius: 30px;
@@ -310,21 +376,24 @@
             color: #e0e4ec;
             transition: all 0.2s;
         }
+
         .file-upload label:hover {
             background: #3a4050;
             color: #f5a623;
         }
 
-        /* ===== Стили для вкладок ===== */
+        /* ===== Вкладка "Продажа" ===== */
         .calc-layout {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
         }
+
         .calc-list {
             flex: 2;
             min-width: 300px;
         }
+
         .calc-totals {
             flex: 1;
             min-width: 220px;
@@ -336,18 +405,21 @@
             top: 20px;
             height: fit-content;
         }
+
         .calc-totals h2 {
             font-size: 16px;
             border-left: 4px solid #f5a623;
             padding-left: 12px;
             margin-bottom: 16px;
         }
+
         .items-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 16px;
             margin-top: 10px;
         }
+
         .item-card {
             background: #1a212c;
             border-radius: 14px;
@@ -357,20 +429,24 @@
             display: flex;
             flex-direction: column;
         }
+
         .item-card:hover {
             border-color: #4a5268;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         }
+
         .item-card.selected {
             border-color: #f5a623;
             background: #1e2633;
         }
+
         .item-card .card-header {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 8px;
         }
+
         .item-card .card-header input[type="checkbox"] {
             width: 20px;
             height: 20px;
@@ -378,21 +454,25 @@
             cursor: pointer;
             flex-shrink: 0;
         }
+
         .item-card .card-header .cname {
             font-weight: 600;
             font-size: 15px;
             color: #e0e4ec;
             word-break: break-word;
         }
+
         .item-card .cprice {
             font-size: 14px;
             color: #8a92a2;
             margin-bottom: 10px;
         }
+
         .item-card .cprice span {
             color: #f5a623;
             font-weight: 600;
         }
+
         .item-card .card-actions {
             display: flex;
             align-items: center;
@@ -402,11 +482,13 @@
             border-top: 1px solid #2a2f3a;
             padding-top: 10px;
         }
+
         .item-card .card-actions label {
             font-size: 12px;
             color: #8a92a2;
             margin-right: 4px;
         }
+
         .item-card .cqty {
             width: 60px;
             background: #0b0e14;
@@ -419,9 +501,11 @@
             text-align: center;
             outline: none;
         }
+
         .item-card .cqty:focus {
             border-color: #f5a623;
         }
+
         .item-card .cline-total {
             font-weight: 700;
             font-size: 15px;
@@ -429,6 +513,7 @@
             margin-left: auto;
             white-space: nowrap;
         }
+
         .total-row {
             display: flex;
             justify-content: space-between;
@@ -437,6 +522,7 @@
             margin-top: 12px;
             font-size: 18px;
         }
+
         .total-row .label {
             color: #8a92a2;
             font-weight: 400;
@@ -444,11 +530,13 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
         .total-row .value {
             color: #f5a623;
             font-weight: 700;
             font-size: 24px;
         }
+
         .select-all-bar {
             display: flex;
             gap: 18px;
@@ -456,6 +544,7 @@
             flex-wrap: wrap;
             align-items: center;
         }
+
         .select-all-bar label {
             font-size: 13px;
             color: #8a92a2;
@@ -464,18 +553,19 @@
             align-items: center;
             gap: 6px;
         }
+
         .select-all-bar input[type="checkbox"] {
             width: 18px;
             height: 18px;
             accent-color: #f5a623;
         }
+
         .select-all-bar .count-badge {
             margin-left: auto;
             font-size: 13px;
             color: #6a7288;
         }
 
-        /* Стили для фильтра категорий и сортировки */
         .filter-sort-bar {
             display: flex;
             flex-wrap: wrap;
@@ -483,6 +573,7 @@
             align-items: center;
             margin-bottom: 16px;
         }
+
         .filter-sort-bar select {
             background: #0b0e14;
             border: 1px solid #2a2f3a;
@@ -495,23 +586,28 @@
             cursor: pointer;
             min-width: 160px;
         }
+
         .filter-sort-bar select:focus {
             border-color: #f5a623;
         }
+
         .filter-sort-bar .sort-buttons {
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
         }
+
         .filter-sort-bar .sort-buttons .btn {
             font-size: 11px;
             padding: 4px 12px;
             background: #1e232c;
             border: 1px solid #3a4050;
         }
+
         .filter-sort-bar .sort-buttons .btn:hover {
             border-color: #f5a623;
         }
+
         .filter-sort-bar .sort-buttons .btn.active-sort {
             border-color: #f5a623;
             color: #f5a623;
@@ -532,6 +628,7 @@
             gap: 12px;
             margin-top: 10px;
         }
+
         .category-item {
             background: #1a212c;
             border-radius: 12px;
@@ -541,29 +638,35 @@
             flex-direction: column;
             gap: 6px;
         }
+
         .category-item .item-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .category-item .item-name {
             font-weight: 500;
             color: #e0e4ec;
         }
+
         .category-item .item-price {
             color: #f5a623;
             font-weight: 600;
         }
+
         .category-item .item-actions {
             display: flex;
             align-items: center;
             gap: 8px;
             margin-top: 4px;
         }
+
         .category-item .item-actions label {
             font-size: 12px;
             color: #8a92a2;
         }
+
         .category-item .cqty-cat {
             width: 60px;
             background: #0b0e14;
@@ -576,9 +679,11 @@
             text-align: center;
             outline: none;
         }
+
         .category-item .cqty-cat:focus {
             border-color: #f5a623;
         }
+
         .category-item .cat-line-total {
             font-weight: 700;
             font-size: 15px;
@@ -594,968 +699,1112 @@
             display: inline-block;
             border: 1px solid #2a2f3a;
         }
+
         .category-total span {
             color: #f5a623;
             font-weight: 700;
         }
 
         @media (max-width: 700px) {
-            .game-title { font-size: 22px; }
-            .game-title small { font-size: 14px; }
-            .hlam-btn { max-width: 180px; font-size: 16px; }
-            .sub-tab-btn { font-size: 12px; padding: 6px 14px; }
-            .calc-layout { flex-direction: column; }
-            .calc-totals { position: static; }
-            .items-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-            .item-card .cname { font-size: 13px; }
-            .category-items { grid-template-columns: 1fr; }
-            .filter-sort-bar { flex-direction: column; align-items: stretch; }
+            .game-title {
+                font-size: 22px;
+            }
+
+            .game-title small {
+                font-size: 14px;
+            }
+
+            .hlam-btn {
+                max-width: 180px;
+                font-size: 16px;
+            }
+
+            .sub-tab-btn {
+                font-size: 12px;
+                padding: 6px 14px;
+            }
+
+            .calc-layout {
+                flex-direction: column;
+            }
+
+            .calc-totals {
+                position: static;
+            }
+
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+
+            .item-card .cname {
+                font-size: 13px;
+            }
+
+            .category-items {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-sort-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
+
         @media (max-width: 450px) {
-            .items-grid { grid-template-columns: 1fr 1fr; }
+            .items-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
-<div class="container">
+    <div class="container">
 
-    <!-- ===== ЗАГОЛОВОК ===== -->
-    <div class="game-title" id="titleClick">
-        <span class="main-title">STALZONE</span>
-        <span class="easter-egg">Че любопытный? Нажни два раза на кнопку ХЛАМ</span>
-    </div>
+        <!-- ===== ЗАГОЛОВОК ===== -->
+        <div class="game-title" id="titleClick">
+            <span class="main-title">STALZONE</span>
+            <span class="easter-egg">Че любопытный? Нажни два раза на кнопку ХЛАМ</span>
+        </div>
 
-    <!-- ===== КНОПКА ХЛАМ ===== -->
-    <button class="hlam-btn" id="hlamBtn">📦 ХЛАМ</button>
+        <!-- ===== КНОПКА ХЛАМ ===== -->
+        <button class="hlam-btn" id="hlamBtn">📦 ХЛАМ</button>
 
-    <!-- ===== ПОДМЕНЮ ===== -->
-    <div class="sub-tabs" id="subTabs">
-        <button class="sub-tab-btn active" data-tab="tab1">📋 прайс-лист</button>
-        <button class="sub-tab-btn" data-tab="tab2">💰 продажа</button>
-        <button class="sub-tab-btn" data-tab="tab3">🥩 мякоть</button>
-        <button class="sub-tab-btn btn-reset" id="resetSalesBtn">🔄 сбросить продажи</button>
-    </div>
+        <!-- ===== ПОДМЕНЮ ===== -->
+        <div class="sub-tabs" id="subTabs">
+            <button class="sub-tab-btn active" data-tab="tab1">📋 прайс-лист</button>
+            <button class="sub-tab-btn" data-tab="tab2">💰 продажа</button>
+            <button class="sub-tab-btn" data-tab="tab3">🥩 мякоть</button>
+            <button class="sub-tab-btn btn-reset" id="resetSalesBtn">🔄 сбросить продажи</button>
+        </div>
 
-    <!-- ============================================================
+        <!-- ============================================================
          ВКЛАДКА 1: ПРАЙС-ЛИСТ
          ============================================================ -->
-    <div id="tab1" class="tab-content active">
-        <div class="card">
-            <h2>📝 редактирование прайс-листа</h2>
-            <p style="font-size:14px; color:#8a92a2; margin-bottom:16px;">
-                Здесь хранятся названия, категории и цены продажи. Все изменения синхронизируются с продажей и мякотью.
-            </p>
+        <div id="tab1" class="tab-content active">
+            <div class="card">
+                <h2>📝 редактирование прайс-листа</h2>
+                <p style="font-size:14px; color:#8a92a2; margin-bottom:16px;">
+                    Здесь хранятся названия, категории и цены продажи. Все изменения синхронизируются с продажей и
+                    мякотью.
+                    <span style="color:#f5a623;">Категорию можно выбрать из списка или создать новую через пункт «+
+                        Новая категория…».</span>
+                </p>
 
-            <div class="table-wrap">
-                <table id="editorTable">
-                    <thead>
-                        <tr>
-                            <th style="width:50px;">#</th>
-                            <th>Название</th>
-                            <th style="min-width:120px;">Категория</th>
-                            <th style="width:160px;">Цена (₽)</th>
-                            <th style="width:80px;"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="editorBody">
-                        <!-- генерируется JS -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
-                <button class="btn btn-success" id="addRowBtn">➕ Добавить</button>
-                <button class="btn btn-danger" id="clearTableBtn">🗑 Очистить всё</button>
-            </div>
-
-            <!-- Импорт -->
-            <div class="import-area">
-                <div style="flex:1; min-width:250px;">
-                    <label style="font-size:13px; color:#8a92a2; display:block; margin-bottom:4px;">⚡ массовый импорт</label>
-                    <textarea id="importText" placeholder="Название, цена, категория&#10;Макоть сластель, 9500, Мякоть"></textarea>
+                <div class="table-wrap">
+                    <table id="editorTable">
+                        <thead>
+                            <tr>
+                                <th style="width:50px;">#</th>
+                                <th>Название</th>
+                                <th style="min-width:150px;">Категория</th>
+                                <th style="width:160px;">Цена (₽)</th>
+                                <th style="width:80px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="editorBody">
+                            <!-- генерируется JS -->
+                        </tbody>
+                    </table>
                 </div>
-                <button class="btn" id="importBtn" style="margin-bottom:6px;">⬇ Импортировать</button>
-                <div class="hint">* Формат: "Название, цена, категория" (категория необязательна).</div>
-                <div class="file-upload">
-                    <label for="fileInput" class="btn" style="margin-bottom:6px;">📂 Загрузить .txt</label>
-                    <input type="file" id="fileInput" accept=".txt">
+
+                <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+                    <button class="btn btn-success" id="addRowBtn">➕ Добавить</button>
+                    <button class="btn btn-danger" id="clearTableBtn">🗑 Очистить всё</button>
+                </div>
+
+                <!-- Импорт -->
+                <div class="import-area">
+                    <div style="flex:1; min-width:250px;">
+                        <label style="font-size:13px; color:#8a92a2; display:block; margin-bottom:4px;">⚡ массовый
+                            импорт</label>
+                        <textarea id="importText"
+                            placeholder="Название, цена, категория&#10;Макоть сластель, 9500, Мякоть"></textarea>
+                    </div>
+                    <button class="btn" id="importBtn" style="margin-bottom:6px;">⬇ Импортировать</button>
+                    <div class="hint">* Формат: "Название, цена, категория" (категория необязательна).</div>
+                    <div class="file-upload">
+                        <label for="fileInput" class="btn" style="margin-bottom:6px;">📂 Загрузить .txt</label>
+                        <input type="file" id="fileInput" accept=".txt">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- ============================================================
+        <!-- ============================================================
          ВКЛАДКА 2: ПРОДАЖА (с фильтром по категориям + сортировка)
          ============================================================ -->
-    <div id="tab2" class="tab-content">
-        <div class="card">
-            <h2>💰 продажа</h2>
-            <div class="calc-layout">
-                <div class="calc-list">
-                    <!-- Панель фильтрации и сортировки -->
-                    <div class="filter-sort-bar">
-                        <label for="sellCategoryFilter" style="font-size:13px; color:#8a92a2;">Категория:</label>
-                        <select id="sellCategoryFilter">
-                            <option value="__all__">Все категории</option>
-                        </select>
-                        <div class="sort-buttons">
-                            <button class="btn active-sort" data-sort="name-asc">Имя ↑</button>
-                            <button class="btn" data-sort="name-desc">Имя ↓</button>
-                            <button class="btn" data-sort="price-asc">Цена ↑</button>
-                            <button class="btn" data-sort="price-desc">Цена ↓</button>
+        <div id="tab2" class="tab-content">
+            <div class="card">
+                <h2>💰 продажа</h2>
+                <div class="calc-layout">
+                    <div class="calc-list">
+                        <div class="filter-sort-bar">
+                            <label for="sellCategoryFilter" style="font-size:13px; color:#8a92a2;">Категория:</label>
+                            <select id="sellCategoryFilter">
+                                <option value="__all__">Все категории</option>
+                            </select>
+                            <div class="sort-buttons">
+                                <button class="btn active-sort" data-sort="name-asc">Имя ↑</button>
+                                <button class="btn" data-sort="name-desc">Имя ↓</button>
+                                <button class="btn" data-sort="price-asc">Цена ↑</button>
+                                <button class="btn" data-sort="price-desc">Цена ↓</button>
+                            </div>
+                        </div>
+
+                        <div class="select-all-bar">
+                            <label><input type="checkbox" id="sellSelectAll"> Выбрать все</label>
+                            <label><input type="checkbox" id="sellDeselectAll"> Снять все</label>
+                            <span class="count-badge" id="sellSelectedCount">Выбрано: 0</span>
+                        </div>
+
+                        <div id="sellListContainer" class="items-grid">
+                            <!-- генерируется JS -->
                         </div>
                     </div>
-
-                    <div class="select-all-bar">
-                        <label><input type="checkbox" id="sellSelectAll"> Выбрать все</label>
-                        <label><input type="checkbox" id="sellDeselectAll"> Снять все</label>
-                        <span class="count-badge" id="sellSelectedCount">Выбрано: 0</span>
-                    </div>
-
-                    <div id="sellListContainer" class="items-grid">
-                        <!-- генерируется JS -->
-                    </div>
-                </div>
-                <div class="calc-totals">
-                    <h2>📊 итог</h2>
-                    <div id="sellTotalDisplay">
-                        <div class="total-row">
-                            <span class="label">Общая выручка</span>
-                            <span class="value" id="sellTotalSum">0 ₽</span>
-                        </div>
-                        <div style="font-size:12px; color:#6a7288; text-align:center; margin-top:10px;">
-                            Отметьте предметы и укажите количество
+                    <div class="calc-totals">
+                        <h2>📊 итог</h2>
+                        <div id="sellTotalDisplay">
+                            <div class="total-row">
+                                <span class="label">Общая выручка</span>
+                                <span class="value" id="sellTotalSum">0 ₽</span>
+                            </div>
+                            <div style="font-size:12px; color:#6a7288; text-align:center; margin-top:10px;">
+                                Отметьте предметы и укажите количество
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- ============================================================
+        <!-- ============================================================
          ВКЛАДКА 3: МЯКОТЬ (только мякоть, без фильтра и сортировки)
          ============================================================ -->
-    <div id="tab3" class="tab-content">
-        <div class="card">
-            <h2>🥩 мякоть</h2>
-            <p style="font-size:14px; color:#8a92a2; margin-bottom:16px;">
-                Список предметов категории «Мякоть». Укажите количество для расчёта общей стоимости.
-            </p>
-            <div id="categoryItemsContainer">
-                <!-- Список мякоти с полем количества -->
-            </div>
-            <div class="category-total" id="categoryTotal">
-                Общая стоимость мякоти (с количеством > 0): <span id="categoryTotalSum">0 ₽</span>
+        <div id="tab3" class="tab-content">
+            <div class="card">
+                <h2>🥩 мякоть</h2>
+                <p style="font-size:14px; color:#8a92a2; margin-bottom:16px;">
+                    Список предметов категории «Мякоть». Укажите количество для расчёта общей стоимости.
+                </p>
+                <div id="categoryItemsContainer">
+                    <!-- Список мякоти с полем количества -->
+                </div>
+                <div class="category-total" id="categoryTotal">
+                    Общая стоимость мякоти (с количеством > 0): <span id="categoryTotalSum">0 ₽</span>
+                </div>
             </div>
         </div>
+
     </div>
 
-</div>
+    <script>
+        // ================================================================
+        //   ХРАНИЛИЩЕ
+        // ================================================================
+        const STORAGE_KEY = 'stalzone_inventory_v6';
+        const CATEGORIES_KEY = 'stalzone_categories'; // отдельное хранилище для категорий
 
-<script>
-    // ================================================================
-    //   ХРАНИЛИЩЕ
-    // ================================================================
-    const STORAGE_KEY = 'stalzone_inventory_v6';
+        // Начальные данные (категории из DEFAULT_ITEMS)
+        const DEFAULT_ITEMS = [
+            "Мякоть сластены, 9500, Мякоть",
+            "Мякоть солевика, 2500, Мякоть",
+            "Мякоть кубарбуза, 800, Мякоть",
+            "Мякоть лимонника, 1200, Мякоть",
+            "Мякоть спиртня, 300, Мякоть",
+            "Мякоть мятноплода, 100, Мякоть",
+            "Янтарная полынь, 8500, Трава",
+            "Чертоцвет, 750, Трава",
+            "Гнозис, 90, Трава",
+            "Водонос, 60, Трава",
+            "Бледнолист, 60, Трава",
+            "Зольные минералы, 1800, Минералы",
+            "Алые минералы, 400, Минералы",
+            "Пурпурные минералы, 250, Минералы",
+            "Лазурные минералы, 80, Минералы",
+            "Изумрудные минералы, 40, Минералы",
+            "Тусклые минералы, 30, Минералы",
+            "Светящийся сахар, 4200, Ресурсы",
+            "Банка с пшеном, 1800, Пищя",
+            "Дрожжи, 3500, Пищя",
+            "Помидор, 1200, Пищя",
+            "Чеснок, 1200, Пищя",
+            "Копыто сильного кабана, 4000, Мутанты",
+            "Боковой горох, 1200, Пищя",
+            "Набор специй, 4000, Пищя",
+            "Молоко, 120, Пищя",
+            "Кофе, 600, Пищя",
+            "Глаз зомби, 350, Мутанты",
+            "Опухоль мертвеца, 5000, Мутанты",
+            "Гипофиз мертвеца, 5000, Мутанты",
+            "Мясо хрюши, 2200, Мутанты",
+            "Мясо кабана, 2200, Мутанты",
+            "Мясо шавки, 2200, Мутанты",
+            "Отличная тушенка, 800, Пищя",
+            "Колбасная нарезка, 700, Пищя",
+            "Газовый Баллон, 6000, Ресурсы",
+            "Кастрюля, 1800, Ресурсы",
+            "Сковорода, 1800, Ресурсы",
+            "Реагенты, 700, Ресурсы",
+            "Мультитул, 3500, Ресурсы",
+            "Набор болтов, 4000, Ресурсы",
+            "Остатки приборов Шепота, 30000, Ресурсы",
+            "Железо, 700, Ресурсы",
+            "Биоактиваты, 7000, Ресурсы",
+            "Удар, 3000, Медицина",
+            "Азотная кислота, 7000, Ресурсы",
+            "Кальванит, 1200, Химия",
+            "Аммиак, 12000, Ресурсы",
+            "Аномалбьная плазма, 1200, Ресурсы",
+            "Аномальная пыль, 300, Ресурсы",
+            "Странный артефакт, 1200, Протоартефакты",
+            "Протоартефакт (обыч), 2000, Протоартефакты",
+            "Протоартефакт (необыч), 3000, Протоартефакты",
+            "Протоартефакт (особый), 6000, Протоартефакты",
+            "Протоартефакт (редк), 10000, Протоартефакты",
+            "Протоартефакт (искл), 20000, Протоартефакты",
+            "Огромный артефактный фрагмент, 1300, Ресурсы",
+            "Батарея холодного синтеза, 4000, Ресурсы",
+            "Темный Лимб, 150000, Ресурсы",
+            "Сердце мутанта Любеча, 8500, Мутанты",
+            "Селезенка мутанта Любера, 9500, Мутанты",
+            "Сердце Лимб, 500000, Мутанты",
+            "Черная селезенка, 100000, Мутанты",
+            "Концентрированный лимб, 450000, Ресурсы",
+            "Консервная банка, 250, Хлам",
+            "Едкий натрий, 1800, Хлам",
+            "Гнилью доски, 700, Хлам",
+            "Щеки, 15, Хлам",
+            "Животный жир, 800, Хлам",
+            "Ткань, 1200, Хлам",
+            "Полутуловая рыба, 3500, Хлам",
+            "Гремучая ртуть, 3000, Хлам",
+            "Крепкая сталь, 100, Хлам",
+            "Набор кухонных ножей, 3800, Хлам",
+            "Сталь, 300, Хлам",
+            "Защитное снаряжение, 6000, Хлам"
+        ];
 
-    // Пример данных с категориями
-    const DEFAULT_ITEMS = [
-        "Макоть сластель, 9500, Мякоть",
-        "Макоть соленка, 2500, Мякоть",
-        "Макоть кубербуза, 800, Мякоть",
-        "Макоть лимонника, 1200, Мякоть",
-        "Макоть спирта, 300, Мякоть",
-        "Макоть мятюльника, 100, Мякоть",
-        "Янтарная вольна, 8500, Минералы",
-        "Чертоцвет, 750, Минералы",
-        "Гвоздь, 90, Металл",
-        "Водонос, 60, Жидкость",
-        "Бензодиэтил, 60, Жидкость",
-        "Зольные минералы, 1800, Минералы",
-        "Алые минералы, 400, Минералы",
-        "Пурпуровые минералы, 250, Минералы",
-        "Латунные минералы, 80, Минералы",
-        "Нумедужные минералы, 40, Минералы",
-        "Тусклые минералы, 30, Минералы",
-        "Светящийся сахар, 4200, Еда",
-        "Башка с шинкой, 1800, Еда",
-        "Дрожжи, 3500, Еда",
-        "Помидор, 1200, Еда",
-        "Чеснок, 1200, Еда",
-        "Коньяк сельского кабана, 4000, Напитки",
-        "Боковой горох, 1200, Еда",
-        "Набор специй, 4000, Еда",
-        "Малокол, 120, Инструменты",
-        "Кофе, 600, Напитки",
-        "Глаз зомби, 350, Мутанты",
-        "Окунь мертвенная, 2500, Мутанты",
-        "Гнилофит мертвенная, 5500, Мутанты",
-        "Мясо хрипя, 2200, Мясо",
-        "Мясо кабана, 2200, Мясо",
-        "Мясо шампиньона, 2200, Мясо",
-        "Охлажная тушенка, 800, Еда",
-        "Кобальтная нарезка, 700, Еда",
-        "Гамма Баллон, 6000, Оружие",
-        "Кастрюля, 1800, Инструменты",
-        "Сковорода, 1800, Инструменты",
-        "Реагенты, 700, Химия",
-        "Мультитул, 3500, Инструменты",
-        "Набор Балтов, 4000, Инструменты",
-        "Остатки приборов Шепота, 30000, Артефакты",
-        "Железо, 700, Металл",
-        "Биоактиваты, 7000, Химия",
-        "Удар, 3000, Оружие",
-        "Аптечка кислота, 7000, Медицина",
-        "Кальванит, 1200, Химия",
-        "Аммиак, 12000, Химия",
-        "Аммиакальная пылька, 1200, Химия",
-        "Аммиакальная пылька, 300, Химия",
-        "Страшный артефакт, 1200, Артефакты",
-        "Протоартефакт (обычный/любимый/особый), 2000, Артефакты",
-        "Огромный артефактный батарея холодного синтеза, 1300, Артефакты",
-        "Огромный батарея холодного синтеза, 4000, Артефакты",
-        "Темный Лимб, 150000, Артефакты",
-        "Сердце мутанта Любера, 8500, Мутанты",
-        "Свежевая мутанта Любера, 9500, Мутанты",
-        "Сердце Лимб, 500000, Артефакты",
-        "Черная свежевая, 100000, Артефакты",
-        "Концентрированная лимба, 450000, Артефакты",
-        "Консервная банка, 250, Еда",
-        "Едкий натрий, 1800, Химия",
-        "Гнилью доски, 700, Материалы",
-        "Щеки, 15, Еда",
-        "Животный жир, 800, Еда",
-        "Ткань, 1200, Материалы",
-        "Полутуловая рыба, 3500, Еда",
-        "Гремучая ртуть, 3000, Химия",
-        "Крепкая сталь, 100, Металл",
-        "Набор кухонных ножей, 3800, Инструменты",
-        "Сталь, 300, Металл",
-        "Защитное снаряжение, 6000, Снаряжение"
-    ];
+        // ================================================================
+        //   ФУНКЦИИ ДЛЯ РАБОТЫ С КАТЕГОРИЯМИ
+        // ================================================================
 
-    // ================================================================
-    //   БАЗОВЫЕ ФУНКЦИИ
-    // ================================================================
-
-    function getItems() {
-        try {
-            const data = localStorage.getItem(STORAGE_KEY);
-            if (data) {
-                const parsed = JSON.parse(data);
-                if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-            }
-        } catch (e) {}
-        return DEFAULT_ITEMS.map((str, index) => {
-            const parts = str.split(',').map(s => s.trim());
-            let name = parts[0] || 'Без названия';
-            let price = parseInt(parts[1]?.replace(/\s/g, '')) || 0;
-            let category = parts[2] || '';
-            return {
-                id: Date.now() + '_' + index + '_' + Math.random().toString(36).slice(2, 5),
-                name: name,
-                category: category,
-                price: price,
-                qty: 0,
-                selected: false
-            };
-        });
-    }
-
-    function saveItems(items) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    }
-
-    function generateId() {
-        return Date.now() + '_' + Math.random().toString(36).slice(2, 7);
-    }
-
-    // ================================================================
-    //   ОТРИСОВКА ПРАЙС-ЛИСТА
-    // ================================================================
-
-    function renderEditor() {
-        const items = getItems();
-        const tbody = document.getElementById('editorBody');
-        tbody.innerHTML = '';
-
-        if (items.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#4a5268; padding:30px;">Прайс-лист пуст. Добавьте предметы!</td></tr>`;
-            return;
+        function getCategories() {
+            try {
+                const data = localStorage.getItem(CATEGORIES_KEY);
+                if (data) {
+                    const parsed = JSON.parse(data);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                }
+            } catch (e) { }
+            // Если нет — создаём из текущих предметов
+            const items = getItems();
+            const cats = [...new Set(items.map(item => item.category).filter(c => c !== ''))];
+            saveCategories(cats);
+            return cats;
         }
 
-        items.forEach((item, index) => {
-            const tr = document.createElement('tr');
-            tr.dataset.id = item.id;
+        function saveCategories(categories) {
+            // Убираем пустые строки и дубли
+            const clean = [...new Set(categories.filter(c => c.trim() !== ''))];
+            localStorage.setItem(CATEGORIES_KEY, JSON.stringify(clean));
+        }
 
-            const tdNum = document.createElement('td');
-            tdNum.textContent = index + 1;
-            tdNum.style.textAlign = 'center';
-            tdNum.style.color = '#6a7288';
-            tdNum.style.fontSize = '13px';
+        // Добавить новую категорию (если её ещё нет)
+        function addCategory(category) {
+            if (!category || category.trim() === '') return;
+            const categories = getCategories();
+            if (!categories.includes(category.trim())) {
+                categories.push(category.trim());
+                saveCategories(categories);
+            }
+        }
 
-            const tdName = document.createElement('td');
-            const inpName = document.createElement('input');
-            inpName.type = 'text';
-            inpName.value = item.name;
-            inpName.placeholder = 'Название...';
-            inpName.addEventListener('change', function() {
-                const newName = this.value.trim() || 'Без названия';
+        // ================================================================
+        //   БАЗОВЫЕ ФУНКЦИИ ДЛЯ ПРЕДМЕТОВ
+        // ================================================================
+
+        function getItems() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                if (data) {
+                    const parsed = JSON.parse(data);
+                    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+                }
+            } catch (e) { }
+            // Создаём из DEFAULT_ITEMS
+            const items = DEFAULT_ITEMS.map((str, index) => {
+                const parts = str.split(',').map(s => s.trim());
+                let name = parts[0] || 'Без названия';
+                let price = parseInt(parts[1]?.replace(/\s/g, '')) || 0;
+                let category = parts[2] || '';
+                return {
+                    id: Date.now() + '_' + index + '_' + Math.random().toString(36).slice(2, 5),
+                    name: name,
+                    category: category,
+                    price: price,
+                    qty: 0,
+                    selected: false
+                };
+            });
+            // Сохраняем категории из предметов
+            const cats = [...new Set(items.map(item => item.category).filter(c => c !== ''))];
+            saveCategories(cats);
+            return items;
+        }
+
+        function saveItems(items) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+            // Обновляем список категорий: добавляем все категории из предметов
+            const cats = [...new Set(items.map(item => item.category).filter(c => c !== ''))];
+            // Объединяем с уже сохранёнными (чтобы не потерять старые)
+            const existing = getCategories();
+            const merged = [...new Set([...existing, ...cats])];
+            saveCategories(merged);
+        }
+
+        function generateId() {
+            return Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+        }
+
+        // ================================================================
+        //   ОТРИСОВКА ПРАЙС-ЛИСТА (с select из общего списка категорий)
+        // ================================================================
+
+        function renderEditor() {
+            const items = getItems();
+            const tbody = document.getElementById('editorBody');
+            tbody.innerHTML = '';
+
+            // Получаем список всех категорий из хранилища
+            const allCategories = getCategories();
+
+            if (items.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#4a5268; padding:30px;">Прайс-лист пуст. Добавьте предметы!</td></tr>`;
+                return;
+            }
+
+            items.forEach((item, index) => {
+                const tr = document.createElement('tr');
+                tr.dataset.id = item.id;
+
+                // Номер
+                const tdNum = document.createElement('td');
+                tdNum.textContent = index + 1;
+                tdNum.style.textAlign = 'center';
+                tdNum.style.color = '#6a7288';
+                tdNum.style.fontSize = '13px';
+
+                // Название
+                const tdName = document.createElement('td');
+                const inpName = document.createElement('input');
+                inpName.type = 'text';
+                inpName.value = item.name;
+                inpName.placeholder = 'Название...';
+                inpName.addEventListener('change', function () {
+                    const newName = this.value.trim() || 'Без названия';
+                    const items = getItems();
+                    const found = items.find(it => it.id === item.id);
+                    if (found) {
+                        found.name = newName;
+                        saveItems(items);
+                        renderEditor();
+                        renderSell();
+                        renderCategory();
+                    }
+                });
+                tdName.appendChild(inpName);
+
+                // === КАТЕГОРИЯ (выпадающий список из всех категорий) ===
+                const tdCategory = document.createElement('td');
+                const selectCat = document.createElement('select');
+                // Стандартная опция "— Выберите —"
+                const defaultOpt = document.createElement('option');
+                defaultOpt.value = '';
+                defaultOpt.textContent = '— Выберите —';
+                selectCat.appendChild(defaultOpt);
+
+                // Все категории из хранилища
+                allCategories.forEach(cat => {
+                    const opt = document.createElement('option');
+                    opt.value = cat;
+                    opt.textContent = cat;
+                    if (cat === item.category) opt.selected = true;
+                    selectCat.appendChild(opt);
+                });
+
+                // Опция для добавления новой категории
+                const newOpt = document.createElement('option');
+                newOpt.value = '__new__';
+                newOpt.textContent = '+ Новая категория…';
+                selectCat.appendChild(newOpt);
+
+                selectCat.addEventListener('change', function () {
+                    const val = this.value;
+                    if (val === '__new__') {
+                        const newCat = prompt('Введите название новой категории:');
+                        if (newCat && newCat.trim()) {
+                            const category = newCat.trim();
+                            // Добавляем в хранилище категорий
+                            addCategory(category);
+                            // Обновляем предмет
+                            const items = getItems();
+                            const found = items.find(it => it.id === item.id);
+                            if (found) {
+                                found.category = category;
+                                saveItems(items);
+                                // Перерисовываем всё
+                                renderEditor();
+                                renderSell();
+                                renderCategory();
+                            }
+                        } else {
+                            // Если отменили — возвращаем предыдущее значение (перерендер)
+                            renderEditor();
+                        }
+                    } else {
+                        // Обычный выбор категории
+                        const category = val;
+                        const items = getItems();
+                        const found = items.find(it => it.id === item.id);
+                        if (found) {
+                            found.category = category;
+                            saveItems(items);
+                            // Не перерисовываем всё, чтобы сохранить фокус, но для простоты перерендерим
+                            renderEditor();
+                            renderSell();
+                            renderCategory();
+                        }
+                    }
+                });
+
+                tdCategory.appendChild(selectCat);
+
+                // Цена
+                const tdPrice = document.createElement('td');
+                const inpPrice = document.createElement('input');
+                inpPrice.type = 'number';
+                inpPrice.value = item.price;
+                inpPrice.min = 0;
+                inpPrice.step = 1;
+                inpPrice.addEventListener('change', function () {
+                    const val = parseInt(this.value) || 0;
+                    const items = getItems();
+                    const found = items.find(it => it.id === item.id);
+                    if (found) {
+                        found.price = val;
+                        saveItems(items);
+                        renderSell();
+                        renderCategory();
+                    }
+                });
+                tdPrice.appendChild(inpPrice);
+
+                // Действие
+                const tdAction = document.createElement('td');
+                tdAction.className = 'td-actions';
+                const delBtn = document.createElement('button');
+                delBtn.className = 'btn-icon';
+                delBtn.textContent = '✕ удалить';
+                delBtn.addEventListener('click', function () {
+                    if (confirm(`Удалить "${item.name}"?`)) {
+                        let items = getItems();
+                        items = items.filter(it => it.id !== item.id);
+                        saveItems(items);
+                        // Не удаляем категорию из общего списка
+                        renderEditor();
+                        renderSell();
+                        renderCategory();
+                    }
+                });
+                tdAction.appendChild(delBtn);
+
+                tr.appendChild(tdNum);
+                tr.appendChild(tdName);
+                tr.appendChild(tdCategory);
+                tr.appendChild(tdPrice);
+                tr.appendChild(tdAction);
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ================================================================
+        //   ОТРИСОВКА ПРОДАЖИ (с фильтром по категориям и сортировкой)
+        // ================================================================
+
+        let sellCategory = '__all__';
+        let sellSort = 'name-asc';
+        let cardElements = {};
+
+        function renderSell() {
+            const items = getItems();
+
+            // Обновляем список категорий в select (из хранилища)
+            const select = document.getElementById('sellCategoryFilter');
+            const allCategories = getCategories();
+            const currentValue = select.value;
+            select.innerHTML = '<option value="__all__">Все категории</option>';
+            allCategories.forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat;
+                opt.textContent = cat;
+                select.appendChild(opt);
+            });
+            if (allCategories.includes(currentValue) || currentValue === '__all__') {
+                select.value = currentValue;
+            } else {
+                select.value = '__all__';
+            }
+            sellCategory = select.value;
+
+            let filtered = items;
+            if (sellCategory !== '__all__') {
+                filtered = filtered.filter(item => item.category === sellCategory);
+            }
+
+            let sorted = [...filtered];
+            switch (sellSort) {
+                case 'name-asc': sorted.sort((a, b) => a.name.localeCompare(b.name)); break;
+                case 'name-desc': sorted.sort((a, b) => b.name.localeCompare(a.name)); break;
+                case 'price-asc': sorted.sort((a, b) => a.price - b.price); break;
+                case 'price-desc': sorted.sort((a, b) => b.price - a.price); break;
+                default: sorted.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            const container = document.getElementById('sellListContainer');
+            const totalSpan = document.getElementById('sellTotalSum');
+            const countSpan = document.getElementById('sellSelectedCount');
+
+            if (sorted.length === 0) {
+                container.innerHTML = `<div class="empty-state">Нет предметов в выбранной категории</div>`;
+                totalSpan.textContent = '0 ₽';
+                countSpan.textContent = 'Выбрано: 0';
+                cardElements = {};
+                return;
+            }
+
+            const currentIds = Object.keys(cardElements);
+            const newIds = sorted.map(it => it.id);
+            const needFullRender = currentIds.length !== newIds.length || !currentIds.every(id => newIds.includes(id));
+
+            if (needFullRender) {
+                container.innerHTML = '';
+                cardElements = {};
+                sorted.forEach(item => {
+                    const card = createCard(item);
+                    container.appendChild(card);
+                    cardElements[item.id] = card;
+                });
+            } else {
+                sorted.forEach(item => {
+                    const card = cardElements[item.id];
+                    if (!card) return;
+                    updateCard(card, item);
+                });
+            }
+
+            let grandTotal = 0;
+            let selectedCount = 0;
+            sorted.forEach(item => {
+                if (item.selected && item.qty > 0) {
+                    grandTotal += item.price * item.qty;
+                    selectedCount++;
+                }
+            });
+            totalSpan.textContent = grandTotal.toLocaleString() + ' ₽';
+            countSpan.textContent = `Выбрано: ${selectedCount}`;
+        }
+
+        function createCard(item) {
+            const card = document.createElement('div');
+            card.className = 'item-card' + (item.selected ? ' selected' : '');
+            card.dataset.id = item.id;
+
+            const header = document.createElement('div');
+            header.className = 'card-header';
+
+            const cb = document.createElement('input');
+            cb.type = 'checkbox';
+            cb.checked = item.selected || false;
+            cb.addEventListener('change', function (e) {
+                e.stopPropagation();
                 const items = getItems();
                 const found = items.find(it => it.id === item.id);
                 if (found) {
-                    found.name = newName;
+                    found.selected = this.checked;
                     saveItems(items);
-                    renderEditor();
-                    renderSell();
-                    renderCategory();
+                    updateCard(card, found);
+                    const allItems = getItems();
+                    let grandTotal = 0, selectedCount = 0;
+                    allItems.forEach(it => {
+                        if (it.selected && it.qty > 0) {
+                            grandTotal += it.price * it.qty;
+                            selectedCount++;
+                        }
+                    });
+                    document.getElementById('sellTotalSum').textContent = grandTotal.toLocaleString() + ' ₽';
+                    document.getElementById('sellSelectedCount').textContent = `Выбрано: ${selectedCount}`;
                 }
             });
-            tdName.appendChild(inpName);
+            header.appendChild(cb);
 
-            const tdCategory = document.createElement('td');
-            const inpCategory = document.createElement('input');
-            inpCategory.type = 'text';
-            inpCategory.value = item.category || '';
-            inpCategory.placeholder = 'Категория...';
-            inpCategory.addEventListener('change', function() {
-                const newCategory = this.value.trim();
-                const items = getItems();
-                const found = items.find(it => it.id === item.id);
-                if (found) {
-                    found.category = newCategory;
-                    saveItems(items);
-                    renderEditor();
-                    renderSell(); // обновим фильтр
-                    renderCategory();
-                }
-            });
-            tdCategory.appendChild(inpCategory);
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'cname';
+            nameSpan.textContent = item.name;
+            header.appendChild(nameSpan);
 
-            const tdPrice = document.createElement('td');
-            const inpPrice = document.createElement('input');
-            inpPrice.type = 'number';
-            inpPrice.value = item.price;
-            inpPrice.min = 0;
-            inpPrice.step = 1;
-            inpPrice.addEventListener('change', function() {
+            const priceDiv = document.createElement('div');
+            priceDiv.className = 'cprice';
+            priceDiv.innerHTML = `Цена: <span>${item.price.toLocaleString()} ₽</span>`;
+
+            const actions = document.createElement('div');
+            actions.className = 'card-actions';
+
+            const qtyLabel = document.createElement('label');
+            qtyLabel.textContent = 'Кол-во:';
+            const qtyInput = document.createElement('input');
+            qtyInput.type = 'number';
+            qtyInput.className = 'cqty';
+            qtyInput.value = item.qty || 0;
+            qtyInput.min = 0;
+            qtyInput.step = 1;
+            qtyInput.dataset.id = item.id;
+            qtyInput.addEventListener('input', function () {
                 const val = parseInt(this.value) || 0;
                 const items = getItems();
                 const found = items.find(it => it.id === item.id);
                 if (found) {
-                    found.price = val;
+                    found.qty = val;
                     saveItems(items);
-                    renderSell();
-                    renderCategory();
+                    updateCard(card, found);
+                    const allItems = getItems();
+                    let grandTotal = 0, selectedCount = 0;
+                    allItems.forEach(it => {
+                        if (it.selected && it.qty > 0) {
+                            grandTotal += it.price * it.qty;
+                            selectedCount++;
+                        }
+                    });
+                    document.getElementById('sellTotalSum').textContent = grandTotal.toLocaleString() + ' ₽';
+                    document.getElementById('sellSelectedCount').textContent = `Выбрано: ${selectedCount}`;
                 }
             });
-            tdPrice.appendChild(inpPrice);
 
-            const tdAction = document.createElement('td');
-            tdAction.className = 'td-actions';
-            const delBtn = document.createElement('button');
-            delBtn.className = 'btn-icon';
-            delBtn.textContent = '✕ удалить';
-            delBtn.addEventListener('click', function() {
-                if (confirm(`Удалить "${item.name}"?`)) {
-                    let items = getItems();
-                    items = items.filter(it => it.id !== item.id);
-                    saveItems(items);
-                    renderEditor();
-                    renderSell();
-                    renderCategory();
-                }
-            });
-            tdAction.appendChild(delBtn);
-
-            tr.appendChild(tdNum);
-            tr.appendChild(tdName);
-            tr.appendChild(tdCategory);
-            tr.appendChild(tdPrice);
-            tr.appendChild(tdAction);
-            tbody.appendChild(tr);
-        });
-    }
-
-    // ================================================================
-    //   ОТРИСОВКА ПРОДАЖИ (с фильтром по категории и сортировкой)
-    // ================================================================
-
-    let sellCategory = '__all__'; // текущая выбранная категория
-    let sellSort = 'name-asc';    // текущая сортировка
-    let cardElements = {};
-
-    function renderSell() {
-        const items = getItems();
-
-        // Обновляем список категорий в select
-        const select = document.getElementById('sellCategoryFilter');
-        const categories = [...new Set(items.map(item => item.category).filter(c => c !== ''))];
-        const currentValue = select.value;
-        select.innerHTML = '<option value="__all__">Все категории</option>';
-        categories.forEach(cat => {
-            const opt = document.createElement('option');
-            opt.value = cat;
-            opt.textContent = cat;
-            select.appendChild(opt);
-        });
-        // Восстанавливаем выбранное значение, если оно ещё есть
-        if (categories.includes(currentValue) || currentValue === '__all__') {
-            select.value = currentValue;
-        } else {
-            select.value = '__all__';
-        }
-        sellCategory = select.value;
-
-        // Фильтруем
-        let filtered = items;
-        if (sellCategory !== '__all__') {
-            filtered = filtered.filter(item => item.category === sellCategory);
-        }
-
-        // Сортируем
-        let sorted = [...filtered];
-        switch (sellSort) {
-            case 'name-asc': sorted.sort((a, b) => a.name.localeCompare(b.name)); break;
-            case 'name-desc': sorted.sort((a, b) => b.name.localeCompare(a.name)); break;
-            case 'price-asc': sorted.sort((a, b) => a.price - b.price); break;
-            case 'price-desc': sorted.sort((a, b) => b.price - a.price); break;
-            default: sorted.sort((a, b) => a.name.localeCompare(b.name));
-        }
-
-        const container = document.getElementById('sellListContainer');
-        const totalSpan = document.getElementById('sellTotalSum');
-        const countSpan = document.getElementById('sellSelectedCount');
-
-        if (sorted.length === 0) {
-            container.innerHTML = `<div class="empty-state">Нет предметов в выбранной категории</div>`;
-            totalSpan.textContent = '0 ₽';
-            countSpan.textContent = 'Выбрано: 0';
-            cardElements = {};
-            return;
-        }
-
-        // Проверяем, нужно ли перерисовывать полностью
-        const currentIds = Object.keys(cardElements);
-        const newIds = sorted.map(it => it.id);
-        const needFullRender = currentIds.length !== newIds.length || !currentIds.every(id => newIds.includes(id));
-
-        if (needFullRender) {
-            container.innerHTML = '';
-            cardElements = {};
-            sorted.forEach(item => {
-                const card = createCard(item);
-                container.appendChild(card);
-                cardElements[item.id] = card;
-            });
-        } else {
-            sorted.forEach(item => {
-                const card = cardElements[item.id];
-                if (!card) return;
-                updateCard(card, item);
-            });
-        }
-
-        // Пересчёт итогов (только для выбранных с количеством > 0)
-        let grandTotal = 0;
-        let selectedCount = 0;
-        sorted.forEach(item => {
-            if (item.selected && item.qty > 0) {
-                grandTotal += item.price * item.qty;
-                selectedCount++;
-            }
-        });
-        totalSpan.textContent = grandTotal.toLocaleString() + ' ₽';
-        countSpan.textContent = `Выбрано: ${selectedCount}`;
-    }
-
-    function createCard(item) {
-        const card = document.createElement('div');
-        card.className = 'item-card' + (item.selected ? ' selected' : '');
-        card.dataset.id = item.id;
-
-        const header = document.createElement('div');
-        header.className = 'card-header';
-
-        const cb = document.createElement('input');
-        cb.type = 'checkbox';
-        cb.checked = item.selected || false;
-        cb.addEventListener('change', function(e) {
-            e.stopPropagation();
-            const items = getItems();
-            const found = items.find(it => it.id === item.id);
-            if (found) {
-                found.selected = this.checked;
-                saveItems(items);
-                updateCard(card, found);
-                // Пересчёт итогов (без полной перерисовки)
-                const allItems = getItems();
-                let grandTotal = 0, selectedCount = 0;
-                allItems.forEach(it => {
-                    if (it.selected && it.qty > 0) {
-                        grandTotal += it.price * it.qty;
-                        selectedCount++;
-                    }
-                });
-                document.getElementById('sellTotalSum').textContent = grandTotal.toLocaleString() + ' ₽';
-                document.getElementById('sellSelectedCount').textContent = `Выбрано: ${selectedCount}`;
-            }
-        });
-        header.appendChild(cb);
-
-        const nameSpan = document.createElement('span');
-        nameSpan.className = 'cname';
-        nameSpan.textContent = item.name;
-        header.appendChild(nameSpan);
-
-        const priceDiv = document.createElement('div');
-        priceDiv.className = 'cprice';
-        priceDiv.innerHTML = `Цена: <span>${item.price.toLocaleString()} ₽</span>`;
-
-        const actions = document.createElement('div');
-        actions.className = 'card-actions';
-
-        const qtyLabel = document.createElement('label');
-        qtyLabel.textContent = 'Кол-во:';
-        const qtyInput = document.createElement('input');
-        qtyInput.type = 'number';
-        qtyInput.className = 'cqty';
-        qtyInput.value = item.qty || 0;
-        qtyInput.min = 0;
-        qtyInput.step = 1;
-        qtyInput.dataset.id = item.id;
-        qtyInput.addEventListener('input', function() {
-            const val = parseInt(this.value) || 0;
-            const items = getItems();
-            const found = items.find(it => it.id === item.id);
-            if (found) {
-                found.qty = val;
-                saveItems(items);
-                updateCard(card, found);
-                // Пересчёт итогов
-                const allItems = getItems();
-                let grandTotal = 0, selectedCount = 0;
-                allItems.forEach(it => {
-                    if (it.selected && it.qty > 0) {
-                        grandTotal += it.price * it.qty;
-                        selectedCount++;
-                    }
-                });
-                document.getElementById('sellTotalSum').textContent = grandTotal.toLocaleString() + ' ₽';
-                document.getElementById('sellSelectedCount').textContent = `Выбрано: ${selectedCount}`;
-            }
-        });
-
-        const totalSpanLine = document.createElement('span');
-        totalSpanLine.className = 'cline-total';
-        const lineTotal = (item.selected ? item.price : 0) * (item.qty || 0);
-        totalSpanLine.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
-
-        actions.appendChild(qtyLabel);
-        actions.appendChild(qtyInput);
-        actions.appendChild(totalSpanLine);
-
-        card.appendChild(header);
-        card.appendChild(priceDiv);
-        card.appendChild(actions);
-
-        return card;
-    }
-
-    function updateCard(card, item) {
-        card.className = 'item-card' + (item.selected ? ' selected' : '');
-        const cb = card.querySelector('.card-header input[type="checkbox"]');
-        if (cb) cb.checked = item.selected || false;
-
-        const nameSpan = card.querySelector('.card-header .cname');
-        if (nameSpan) nameSpan.textContent = item.name;
-
-        const priceSpan = card.querySelector('.cprice span');
-        if (priceSpan) priceSpan.textContent = item.price.toLocaleString() + ' ₽';
-
-        const qtyInput = card.querySelector('.cqty');
-        if (qtyInput && document.activeElement !== qtyInput) {
-            qtyInput.value = item.qty || 0;
-        }
-
-        const totalSpan = card.querySelector('.cline-total');
-        if (totalSpan) {
+            const totalSpanLine = document.createElement('span');
+            totalSpanLine.className = 'cline-total';
             const lineTotal = (item.selected ? item.price : 0) * (item.qty || 0);
-            totalSpan.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
+            totalSpanLine.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
+
+            actions.appendChild(qtyLabel);
+            actions.appendChild(qtyInput);
+            actions.appendChild(totalSpanLine);
+
+            card.appendChild(header);
+            card.appendChild(priceDiv);
+            card.appendChild(actions);
+
+            return card;
         }
-    }
 
-    // Обработчики для фильтра категорий и сортировки
-    document.getElementById('sellCategoryFilter').addEventListener('change', function() {
-        sellCategory = this.value;
-        renderSell();
-    });
+        function updateCard(card, item) {
+            card.className = 'item-card' + (item.selected ? ' selected' : '');
+            const cb = card.querySelector('.card-header input[type="checkbox"]');
+            if (cb) cb.checked = item.selected || false;
 
-    document.querySelectorAll('.sort-buttons .btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const sort = this.dataset.sort;
-            if (sort) {
-                sellSort = sort;
-                document.querySelectorAll('.sort-buttons .btn').forEach(b => b.classList.remove('active-sort'));
-                this.classList.add('active-sort');
-                renderSell();
+            const nameSpan = card.querySelector('.card-header .cname');
+            if (nameSpan) nameSpan.textContent = item.name;
+
+            const priceSpan = card.querySelector('.cprice span');
+            if (priceSpan) priceSpan.textContent = item.price.toLocaleString() + ' ₽';
+
+            const qtyInput = card.querySelector('.cqty');
+            if (qtyInput && document.activeElement !== qtyInput) {
+                qtyInput.value = item.qty || 0;
             }
-        });
-    });
 
-    // ================================================================
-    //   ОТРИСОВКА ВКЛАДКИ "МЯКОТЬ" (только категория "Мякоть")
-    // ================================================================
-
-    let catCardElements = {};
-
-    function renderCategory() {
-        const items = getItems();
-        const container = document.getElementById('categoryItemsContainer');
-        const totalSpan = document.getElementById('categoryTotalSum');
-
-        // Фильтруем только Мякоть
-        const filtered = items.filter(item => item.category === 'Мякоть');
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
-
-        if (filtered.length === 0) {
-            container.innerHTML = `<div class="empty-state">Нет предметов в категории «Мякоть»</div>`;
-            totalSpan.textContent = '0 ₽';
-            catCardElements = {};
-            return;
+            const totalSpan = card.querySelector('.cline-total');
+            if (totalSpan) {
+                const lineTotal = (item.selected ? item.price : 0) * (item.qty || 0);
+                totalSpan.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
+            }
         }
 
-        const currentIds = Object.keys(catCardElements);
-        const newIds = filtered.map(it => it.id);
-        const needFullRender = currentIds.length !== newIds.length || !currentIds.every(id => newIds.includes(id));
-
-        if (needFullRender) {
-            container.innerHTML = '';
-            catCardElements = {};
-            filtered.forEach(item => {
-                const el = createCategoryItem(item);
-                container.appendChild(el);
-                catCardElements[item.id] = el;
-            });
-        } else {
-            filtered.forEach(item => {
-                const el = catCardElements[item.id];
-                if (!el) return;
-                updateCategoryItem(el, item);
-            });
-        }
-
-        let total = 0;
-        filtered.forEach(item => {
-            if (item.qty > 0) total += item.price * item.qty;
+        // Обработчики для фильтра и сортировки в продаже
+        document.getElementById('sellCategoryFilter').addEventListener('change', function () {
+            sellCategory = this.value;
+            renderSell();
         });
-        totalSpan.textContent = total.toLocaleString() + ' ₽';
-    }
 
-    function createCategoryItem(item) {
-        const div = document.createElement('div');
-        div.className = 'category-item';
-        div.dataset.id = item.id;
+        document.querySelectorAll('.sort-buttons .btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const sort = this.dataset.sort;
+                if (sort) {
+                    sellSort = sort;
+                    document.querySelectorAll('.sort-buttons .btn').forEach(b => b.classList.remove('active-sort'));
+                    this.classList.add('active-sort');
+                    renderSell();
+                }
+            });
+        });
 
-        const row = document.createElement('div');
-        row.className = 'item-row';
-        const nameSpan = document.createElement('span');
-        nameSpan.className = 'item-name';
-        nameSpan.textContent = item.name;
-        const priceSpan = document.createElement('span');
-        priceSpan.className = 'item-price';
-        priceSpan.textContent = item.price.toLocaleString() + ' ₽';
-        row.appendChild(nameSpan);
-        row.appendChild(priceSpan);
-        div.appendChild(row);
+        // ================================================================
+        //   ОТРИСОВКА ВКЛАДКИ "МЯКОТЬ" (только категория "Мякоть")
+        // ================================================================
 
-        const actions = document.createElement('div');
-        actions.className = 'item-actions';
-        const qtyLabel = document.createElement('label');
-        qtyLabel.textContent = 'Кол-во:';
-        const qtyInput = document.createElement('input');
-        qtyInput.type = 'number';
-        qtyInput.className = 'cqty-cat';
-        qtyInput.value = item.qty || 0;
-        qtyInput.min = 0;
-        qtyInput.step = 1;
-        qtyInput.dataset.id = item.id;
-        qtyInput.addEventListener('input', function() {
-            const val = parseInt(this.value) || 0;
+        let catCardElements = {};
+
+        function renderCategory() {
             const items = getItems();
-            const found = items.find(it => it.id === item.id);
-            if (found) {
-                found.qty = val;
-                saveItems(items);
-                const el = catCardElements[item.id];
-                if (el) updateCategoryItem(el, found);
-                const filtered = getItems().filter(it => it.category === 'Мякоть');
-                let total = 0;
-                filtered.forEach(it => { if (it.qty > 0) total += it.price * it.qty; });
-                document.getElementById('categoryTotalSum').textContent = total.toLocaleString() + ' ₽';
+            const container = document.getElementById('categoryItemsContainer');
+            const totalSpan = document.getElementById('categoryTotalSum');
+
+            const filtered = items.filter(item => item.category === 'Мякоть');
+            filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="empty-state">Нет предметов в категории «Мякоть»</div>`;
+                totalSpan.textContent = '0 ₽';
+                catCardElements = {};
+                return;
             }
-        });
 
-        const totalSpanLine = document.createElement('span');
-        totalSpanLine.className = 'cat-line-total';
-        const lineTotal = (item.qty || 0) * item.price;
-        totalSpanLine.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
+            const currentIds = Object.keys(catCardElements);
+            const newIds = filtered.map(it => it.id);
+            const needFullRender = currentIds.length !== newIds.length || !currentIds.every(id => newIds.includes(id));
 
-        actions.appendChild(qtyLabel);
-        actions.appendChild(qtyInput);
-        actions.appendChild(totalSpanLine);
-        div.appendChild(actions);
+            if (needFullRender) {
+                container.innerHTML = '';
+                catCardElements = {};
+                filtered.forEach(item => {
+                    const el = createCategoryItem(item);
+                    container.appendChild(el);
+                    catCardElements[item.id] = el;
+                });
+            } else {
+                filtered.forEach(item => {
+                    const el = catCardElements[item.id];
+                    if (!el) return;
+                    updateCategoryItem(el, item);
+                });
+            }
 
-        return div;
-    }
+            let total = 0;
+            filtered.forEach(item => {
+                if (item.qty > 0) total += item.price * item.qty;
+            });
+            totalSpan.textContent = total.toLocaleString() + ' ₽';
+        }
 
-    function updateCategoryItem(el, item) {
-        const nameSpan = el.querySelector('.item-name');
-        if (nameSpan) nameSpan.textContent = item.name;
-        const priceSpan = el.querySelector('.item-price');
-        if (priceSpan) priceSpan.textContent = item.price.toLocaleString() + ' ₽';
+        function createCategoryItem(item) {
+            const div = document.createElement('div');
+            div.className = 'category-item';
+            div.dataset.id = item.id;
 
-        const qtyInput = el.querySelector('.cqty-cat');
-        if (qtyInput && document.activeElement !== qtyInput) {
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'item-name';
+            nameSpan.textContent = item.name;
+            const priceSpan = document.createElement('span');
+            priceSpan.className = 'item-price';
+            priceSpan.textContent = item.price.toLocaleString() + ' ₽';
+            row.appendChild(nameSpan);
+            row.appendChild(priceSpan);
+            div.appendChild(row);
+
+            const actions = document.createElement('div');
+            actions.className = 'item-actions';
+            const qtyLabel = document.createElement('label');
+            qtyLabel.textContent = 'Кол-во:';
+            const qtyInput = document.createElement('input');
+            qtyInput.type = 'number';
+            qtyInput.className = 'cqty-cat';
             qtyInput.value = item.qty || 0;
-        }
-        const totalSpan = el.querySelector('.cat-line-total');
-        if (totalSpan) {
+            qtyInput.min = 0;
+            qtyInput.step = 1;
+            qtyInput.dataset.id = item.id;
+            qtyInput.addEventListener('input', function () {
+                const val = parseInt(this.value) || 0;
+                const items = getItems();
+                const found = items.find(it => it.id === item.id);
+                if (found) {
+                    found.qty = val;
+                    saveItems(items);
+                    const el = catCardElements[item.id];
+                    if (el) updateCategoryItem(el, found);
+                    const filtered = getItems().filter(it => it.category === 'Мякоть');
+                    let total = 0;
+                    filtered.forEach(it => { if (it.qty > 0) total += it.price * it.qty; });
+                    document.getElementById('categoryTotalSum').textContent = total.toLocaleString() + ' ₽';
+                }
+            });
+
+            const totalSpanLine = document.createElement('span');
+            totalSpanLine.className = 'cat-line-total';
             const lineTotal = (item.qty || 0) * item.price;
-            totalSpan.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
+            totalSpanLine.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
+
+            actions.appendChild(qtyLabel);
+            actions.appendChild(qtyInput);
+            actions.appendChild(totalSpanLine);
+            div.appendChild(actions);
+
+            return div;
         }
-    }
 
-    // ================================================================
-    //   ДОБАВЛЕНИЕ / УДАЛЕНИЕ / ИМПОРТ
-    // ================================================================
+        function updateCategoryItem(el, item) {
+            const nameSpan = el.querySelector('.item-name');
+            if (nameSpan) nameSpan.textContent = item.name;
+            const priceSpan = el.querySelector('.item-price');
+            if (priceSpan) priceSpan.textContent = item.price.toLocaleString() + ' ₽';
 
-    document.getElementById('addRowBtn').addEventListener('click', function() {
-        const items = getItems();
-        items.push({
-            id: generateId(),
-            name: 'Новый предмет',
-            category: '',
-            price: 0,
-            qty: 0,
-            selected: false
-        });
-        saveItems(items);
-        renderEditor();
-        renderSell();
-        renderCategory();
-    });
+            const qtyInput = el.querySelector('.cqty-cat');
+            if (qtyInput && document.activeElement !== qtyInput) {
+                qtyInput.value = item.qty || 0;
+            }
+            const totalSpan = el.querySelector('.cat-line-total');
+            if (totalSpan) {
+                const lineTotal = (item.qty || 0) * item.price;
+                totalSpan.textContent = lineTotal > 0 ? lineTotal.toLocaleString() + ' ₽' : '0 ₽';
+            }
+        }
 
-    document.getElementById('clearTableBtn').addEventListener('click', function() {
-        if (confirm('Удалить ВСЕ предметы из прайс-листа?')) {
-            saveItems([]);
+        // ================================================================
+        //   ДОБАВЛЕНИЕ / УДАЛЕНИЕ / ИМПОРТ
+        // ================================================================
+
+        document.getElementById('addRowBtn').addEventListener('click', function () {
+            const items = getItems();
+            items.push({
+                id: generateId(),
+                name: 'Новый предмет',
+                category: '',
+                price: 0,
+                qty: 0,
+                selected: false
+            });
+            saveItems(items);
             renderEditor();
-            cardElements = {};
-            catCardElements = {};
             renderSell();
             renderCategory();
-        }
-    });
+        });
 
-    function parseImportText(text) {
-        const lines = text.split('\n').filter(line => line.trim() !== '');
-        const newItems = [];
-        lines.forEach(line => {
-            let parts = line.split(/[,;\t]\s*/).map(s => s.trim());
-            if (parts.length < 2) {
-                const numbers = line.match(/\d+[\s\d]*\d+/g);
-                if (numbers && numbers.length > 0) {
-                    let price = parseInt(numbers[numbers.length - 1].replace(/\s/g, '')) || 0;
-                    let name = line.replace(numbers[numbers.length - 1], '').trim().replace(/[,\-–—]\s*$/, '');
-                    let category = '';
-                    if (numbers.length > 1) {
-                        category = numbers.slice(0, -1).join(' ').trim();
-                    }
-                    parts = [name, price.toString(), category];
-                }
-            }
-            let name = parts[0] || 'Без названия';
-            let price = parseInt(parts[1]?.replace(/\s/g, '')) || 0;
-            let category = parts[2] || '';
-            if (name) {
-                newItems.push({
-                    id: generateId(),
-                    name: name,
-                    category: category,
-                    price: price || 0,
-                    qty: 0,
-                    selected: false
-                });
+        document.getElementById('clearTableBtn').addEventListener('click', function () {
+            if (confirm('Удалить ВСЕ предметы из прайс-листа?')) {
+                saveItems([]);
+                // Категории остаются в хранилище, но можно их не удалять
+                renderEditor();
+                cardElements = {};
+                catCardElements = {};
+                renderSell();
+                renderCategory();
             }
         });
-        return newItems;
-    }
 
-    document.getElementById('importBtn').addEventListener('click', function() {
-        const text = document.getElementById('importText').value;
-        if (!text.trim()) {
-            alert('Вставьте список предметов!');
-            return;
+        function parseImportText(text) {
+            const lines = text.split('\n').filter(line => line.trim() !== '');
+            const newItems = [];
+            const categoriesToAdd = [];
+            lines.forEach(line => {
+                let parts = line.split(/[,;\t]\s*/).map(s => s.trim());
+                if (parts.length < 2) {
+                    const numbers = line.match(/\d+[\s\d]*\d+/g);
+                    if (numbers && numbers.length > 0) {
+                        let price = parseInt(numbers[numbers.length - 1].replace(/\s/g, '')) || 0;
+                        let name = line.replace(numbers[numbers.length - 1], '').trim().replace(/[,\-–—]\s*$/, '');
+                        let category = '';
+                        if (numbers.length > 1) {
+                            category = numbers.slice(0, -1).join(' ').trim();
+                        }
+                        parts = [name, price.toString(), category];
+                    }
+                }
+                let name = parts[0] || 'Без названия';
+                let price = parseInt(parts[1]?.replace(/\s/g, '')) || 0;
+                let category = parts[2] || '';
+                if (name) {
+                    newItems.push({
+                        id: generateId(),
+                        name: name,
+                        category: category,
+                        price: price || 0,
+                        qty: 0,
+                        selected: false
+                    });
+                    if (category) categoriesToAdd.push(category);
+                }
+            });
+            // Добавляем новые категории в хранилище
+            categoriesToAdd.forEach(cat => addCategory(cat));
+            return newItems;
         }
-        const parsed = parseImportText(text);
-        if (parsed.length === 0) {
-            alert('Не удалось распознать предметы.');
-            return;
-        }
-        const current = getItems();
-        saveItems([...current, ...parsed]);
-        document.getElementById('importText').value = '';
-        renderEditor();
-        cardElements = {};
-        catCardElements = {};
-        renderSell();
-        renderCategory();
-        alert(`✅ Добавлено ${parsed.length} предметов!`);
-    });
 
-    document.getElementById('fileInput').addEventListener('change', function(e) {
-        const file = this.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const content = event.target.result;
-            const parsed = parseImportText(content);
+        document.getElementById('importBtn').addEventListener('click', function () {
+            const text = document.getElementById('importText').value;
+            if (!text.trim()) {
+                alert('Вставьте список предметов!');
+                return;
+            }
+            const parsed = parseImportText(text);
             if (parsed.length === 0) {
-                alert('Не удалось распознать предметы в файле.');
+                alert('Не удалось распознать предметы.');
                 return;
             }
             const current = getItems();
             saveItems([...current, ...parsed]);
+            document.getElementById('importText').value = '';
             renderEditor();
             cardElements = {};
             catCardElements = {};
             renderSell();
             renderCategory();
-            alert(`✅ Загружено ${parsed.length} предметов из файла!`);
-            document.getElementById('fileInput').value = '';
-        };
-        reader.readAsText(file, 'UTF-8');
-    });
+            alert(`✅ Добавлено ${parsed.length} предметов!`);
+        });
 
-    // ================================================================
-    //   СБРОС ПРОДАЖ
-    // ================================================================
+        document.getElementById('fileInput').addEventListener('change', function (e) {
+            const file = this.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const content = event.target.result;
+                const parsed = parseImportText(content);
+                if (parsed.length === 0) {
+                    alert('Не удалось распознать предметы в файле.');
+                    return;
+                }
+                const current = getItems();
+                saveItems([...current, ...parsed]);
+                renderEditor();
+                cardElements = {};
+                catCardElements = {};
+                renderSell();
+                renderCategory();
+                alert(`✅ Загружено ${parsed.length} предметов из файла!`);
+                document.getElementById('fileInput').value = '';
+            };
+            reader.readAsText(file, 'UTF-8');
+        });
 
-    document.getElementById('resetSalesBtn').addEventListener('click', function() {
-        if (confirm('Сбросить все количества и галочки в продаже?')) {
-            const items = getItems();
-            items.forEach(item => {
-                item.qty = 0;
-                item.selected = false;
+        // ================================================================
+        //   СБРОС ПРОДАЖ
+        // ================================================================
+
+        document.getElementById('resetSalesBtn').addEventListener('click', function () {
+            if (confirm('Сбросить все количества и галочки в продаже?')) {
+                const items = getItems();
+                items.forEach(item => {
+                    item.qty = 0;
+                    item.selected = false;
+                });
+                saveItems(items);
+                renderSell();
+                renderCategory();
+            }
+        });
+
+        // ================================================================
+        //   КНОПКА ХЛАМ
+        // ================================================================
+
+        let isHlamOpen = false;
+
+        document.getElementById('hlamBtn').addEventListener('click', function () {
+            const subTabs = document.getElementById('subTabs');
+            if (isHlamOpen) {
+                subTabs.classList.remove('show');
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+                document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+                isHlamOpen = false;
+            } else {
+                subTabs.classList.add('show');
+                const firstTab = document.querySelector('.sub-tab-btn:not(.btn-reset)');
+                if (firstTab) {
+                    firstTab.classList.add('active');
+                    document.getElementById(firstTab.dataset.tab).classList.add('active');
+                }
+                isHlamOpen = true;
+            }
+        });
+
+        // ================================================================
+        //   ПАСХАЛКА-РИКРОЛЛ
+        // ================================================================
+
+        document.getElementById('hlamBtn').addEventListener('dblclick', function (e) {
+            e.stopPropagation();
+            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+        });
+
+        // ================================================================
+        //   ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+        // ================================================================
+
+        document.querySelectorAll('.sub-tab-btn[data-tab]').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+                const tabId = this.dataset.tab;
+                document.getElementById(tabId).classList.add('active');
+                if (tabId === 'tab2') renderSell();
+                if (tabId === 'tab3') renderCategory();
             });
+        });
+
+        // ================================================================
+        //   ВЫБРАТЬ / СНЯТЬ ВСЕ (продажа)
+        // ================================================================
+
+        document.getElementById('sellSelectAll').addEventListener('change', function () {
+            const items = getItems();
+            items.forEach(it => it.selected = true);
             saveItems(items);
             renderSell();
-            renderCategory();
-        }
-    });
-
-    // ================================================================
-    //   КНОПКА ХЛАМ
-    // ================================================================
-
-    let isHlamOpen = false;
-
-    document.getElementById('hlamBtn').addEventListener('click', function() {
-        const subTabs = document.getElementById('subTabs');
-        if (isHlamOpen) {
-            subTabs.classList.remove('show');
-            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-            document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-            isHlamOpen = false;
-        } else {
-            subTabs.classList.add('show');
-            const firstTab = document.querySelector('.sub-tab-btn:not(.btn-reset)');
-            if (firstTab) {
-                firstTab.classList.add('active');
-                document.getElementById(firstTab.dataset.tab).classList.add('active');
-            }
-            isHlamOpen = true;
-        }
-    });
-
-    // ================================================================
-    //   ПАСХАЛКА-РИКРОЛЛ
-    // ================================================================
-
-    document.getElementById('hlamBtn').addEventListener('dblclick', function(e) {
-        e.stopPropagation();
-        window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
-    });
-
-    // ================================================================
-    //   ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
-    // ================================================================
-
-    document.querySelectorAll('.sub-tab-btn[data-tab]').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-            const tabId = this.dataset.tab;
-            document.getElementById(tabId).classList.add('active');
-            if (tabId === 'tab2') renderSell();
-            if (tabId === 'tab3') renderCategory();
+            this.checked = false;
         });
-    });
 
-    // ================================================================
-    //   ВЫБРАТЬ / СНЯТЬ ВСЕ (продажа)
-    // ================================================================
+        document.getElementById('sellDeselectAll').addEventListener('change', function () {
+            const items = getItems();
+            items.forEach(it => it.selected = false);
+            saveItems(items);
+            renderSell();
+            this.checked = false;
+        });
 
-    document.getElementById('sellSelectAll').addEventListener('change', function() {
-        const items = getItems();
-        items.forEach(it => it.selected = true);
-        saveItems(items);
-        renderSell();
-        this.checked = false;
-    });
+        // ================================================================
+        //   ПАСХАЛКА НА ЗАГОЛОВОК
+        // ================================================================
 
-    document.getElementById('sellDeselectAll').addEventListener('change', function() {
-        const items = getItems();
-        items.forEach(it => it.selected = false);
-        saveItems(items);
-        renderSell();
-        this.checked = false;
-    });
-
-    // ================================================================
-    //   ПАСХАЛКА НА ЗАГОЛОВОК
-    // ================================================================
-
-    document.getElementById('titleClick').addEventListener('click', function() {
-        const egg = this.querySelector('.easter-egg');
-        if (egg.classList.contains('show')) {
-            egg.classList.remove('show');
-            setTimeout(() => { egg.style.display = 'none'; }, 300);
-        } else {
-            egg.style.display = 'inline-block';
-            egg.classList.remove('show');
-            void egg.offsetWidth;
-            egg.classList.add('show');
-            clearTimeout(window.eggTimer);
-            window.eggTimer = setTimeout(() => {
+        document.getElementById('titleClick').addEventListener('click', function () {
+            const egg = this.querySelector('.easter-egg');
+            if (egg.classList.contains('show')) {
                 egg.classList.remove('show');
                 setTimeout(() => { egg.style.display = 'none'; }, 300);
-            }, 2000);
-        }
-    });
+            } else {
+                egg.style.display = 'inline-block';
+                egg.classList.remove('show');
+                void egg.offsetWidth;
+                egg.classList.add('show');
+                clearTimeout(window.eggTimer);
+                window.eggTimer = setTimeout(() => {
+                    egg.classList.remove('show');
+                    setTimeout(() => { egg.style.display = 'none'; }, 300);
+                }, 2000);
+            }
+        });
 
-    // ================================================================
-    //   СТАРТ
-    // ================================================================
+        // ================================================================
+        //   СТАРТ
+        // ================================================================
 
-    document.getElementById('subTabs').classList.remove('show');
-    document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-    document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('subTabs').classList.remove('show');
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
 
-    renderEditor();
-    renderSell();
-    renderCategory();
-</script>
+        renderEditor();
+        renderSell();
+        renderCategory();
+    </script>
 </body>
+
 </html>
